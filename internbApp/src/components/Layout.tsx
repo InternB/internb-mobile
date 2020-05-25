@@ -21,6 +21,7 @@ interface Props {
 
   width?: number | string | undefined;
   height?: number | string | undefined;
+  flex?: number | undefined;
 }
 
 export const Column: React.FC<Props> = ({
@@ -29,6 +30,7 @@ export const Column: React.FC<Props> = ({
   height = undefined,
   justifyContent = 'flex-start',
   alingItems = 'center',
+  flex = undefined,
 }) => {
   // custom style based on props given
   const column = StyleSheet.create({
@@ -39,6 +41,7 @@ export const Column: React.FC<Props> = ({
       flexDirection: 'column',
       justifyContent: justifyContent,
       alignItems: alingItems,
+      flex: flex,
     },
   });
 
@@ -55,6 +58,7 @@ export const Row: React.FC<Props> = ({
   height = undefined,
   justifyContent = 'flex-start',
   alingItems = 'center',
+  flex = undefined,
 }) => {
   // custom style based on props given
   const row = StyleSheet.create({
@@ -65,6 +69,7 @@ export const Row: React.FC<Props> = ({
       flexDirection: 'row',
       justifyContent: justifyContent,
       alignItems: alingItems,
+      flex: flex,
     },
   });
 
