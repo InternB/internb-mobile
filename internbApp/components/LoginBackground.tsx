@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {StyleSheet, SafeAreaView} from 'react-native';
 
 interface Props {}
 
 const LoginBackground: React.FC<Props> = ({children}) => {
   return (
     <>
-      <View style={styles.background}>{children}</View>
+      <SafeAreaView style={styles.background}>{children}</SafeAreaView>
     </>
   );
 };
