@@ -1,7 +1,7 @@
 import {NavigationStackProp} from 'react-navigation-stack';
 import React, {useState} from 'react';
 import Background from '../components/LoginBackground';
-import Title from '../components/Title';
+import Title from '../components/AppTitle';
 import Container from '../components/Container';
 import {Column, Row} from '../components/Layout';
 import FormInput from '../components/FormInput';
