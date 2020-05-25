@@ -49,15 +49,15 @@ const styles = StyleSheet.create({
     borderColor: '#1c1e83',
     borderWidth: 3,
     borderRadius: 10,
-    width: 90,
-    height: 25,
+    width: 100,
+    height: 30,
     marginRight: 10,
     marginLeft: 10,
   },
   text: {
     fontWeight: 'bold',
     color: '#000000',
-    letterSpacing: 1,
+    letterSpacing: 0,
   },
 });
 
@@ -71,15 +71,15 @@ const disabledButton = StyleSheet.create({
     borderColor: '#1c1e8366',
     borderWidth: 3,
     borderRadius: 10,
-    width: 90,
-    height: 25,
+    width: 100,
+    height: 30,
     marginRight: 10,
     marginLeft: 10,
   },
   text: {
     fontWeight: 'bold',
     color: '#000000',
-    letterSpacing: 1,
+    letterSpacing: 0,
     opacity: 0.4,
   },
 });
