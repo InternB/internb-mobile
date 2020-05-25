@@ -9,9 +9,14 @@ import FormButton from '../components/FormButton';
 const LoginScreen = () => {
   const [cpf, setCpf] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const test = () => {
+  const handleClick = () => {
     console.log(`enviando CPF: ${cpf} e senha: ${password}`);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
 
   return (
@@ -28,7 +33,11 @@ const LoginScreen = () => {
                 field={password}
                 setField={setPassword}
               />
-              <FormButton buttonText="Entrar" onPress={test} />
+              <FormButton
+                buttonText="Entrar"
+                onPress={handleClick}
+                isLoading={loading}
+              />
             </Column>
           </Container>
         </Column>
