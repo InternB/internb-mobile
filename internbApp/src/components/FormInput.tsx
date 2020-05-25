@@ -4,8 +4,8 @@ import {Row} from './Layout';
 
 interface Props {
   label: string;
-  field?: string;
-  setField?: any;
+  field: string;
+  setField: any;
   isProtected?: boolean;
   inlineLabel?: boolean;
 }
