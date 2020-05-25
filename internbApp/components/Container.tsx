@@ -1,26 +1,30 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-interface Props {}
+interface Props {
+  width?: number | string | undefined;
+  height?: number | string | undefined;
+}
 
-const Container: React.FC<Props> = ({children}) => {
+const Container: React.FC<Props> = ({children, width, height}) => {
+  const container = StyleSheet.create({
+    container: {
+      width: width || '80%',
+      height: height || '25%',
+      backgroundColor: '#ffffff',
+      borderColor: '#000',
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderRadius: 20,
+      position: 'relative',
+    },
+  });
+
   return (
     <>
-      <View style={styles.container}>{children}</View>
+      <View style={container.container}>{children}</View>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: '80%',
-    backgroundColor: '#ffffff',
-    borderColor: '#000',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderRadius: 20,
-    position: 'relative',
-  },
-});
 
 export default Container;
