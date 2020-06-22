@@ -22,6 +22,7 @@ interface Props {
   width?: number | string | undefined;
   height?: number | string | undefined;
   flex?: number | undefined;
+  debug?: boolean;
 }
 
 export const Column: React.FC<Props> = ({
@@ -31,7 +32,13 @@ export const Column: React.FC<Props> = ({
   justifyContent = 'flex-start',
   alingItems = 'center',
   flex = undefined,
+  debug = false,
 }) => {
+  let backgroundColor: string | undefined;
+
+  if (debug === true) {
+    backgroundColor = 'red';
+  }
   // custom style based on props given
   const column = StyleSheet.create({
     column: {
@@ -42,6 +49,7 @@ export const Column: React.FC<Props> = ({
       justifyContent: justifyContent,
       alignItems: alingItems,
       flex: flex,
+      backgroundColor: backgroundColor,
     },
   });
 
@@ -59,7 +67,13 @@ export const Row: React.FC<Props> = ({
   justifyContent = 'flex-start',
   alingItems = 'center',
   flex = undefined,
+  debug = false,
 }) => {
+  let backgroundColor: string | undefined;
+
+  if (debug === true) {
+    backgroundColor = 'red';
+  }
   // custom style based on props given
   const row = StyleSheet.create({
     row: {
@@ -70,6 +84,7 @@ export const Row: React.FC<Props> = ({
       justifyContent: justifyContent,
       alignItems: alingItems,
       flex: flex,
+      backgroundColor: backgroundColor,
     },
   });
 
