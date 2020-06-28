@@ -1,11 +1,11 @@
 // core imports
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 // screens imports
-import Login from './src/screens/LoginScreen';
-import SignUp from './src/screens/SignUpScreen';
+import Login from './src/pages/SignIn';
+import SignUp from './src/pages/SignUp';
 
 const Stack = createStackNavigator();
 
@@ -16,12 +16,12 @@ const Routes = () => {
         <Stack.Screen
           name="Login"
           component={Login}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Sign Up"
           component={SignUp}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
