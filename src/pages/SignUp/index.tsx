@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import {SignUpBackground as Background} from '../components/LoginBackground';
-import Title, {TitleHeader} from '../components/AppTitle';
-import {Column, Row} from '../components/Layout';
-import PageTitle from '../components/PageTitle';
-import Container from '../components/Container';
-import FormInput from '../components/FormInput';
-import FormRadioInput from '../components/FormRadioInput';
-import FormButton from '../components/FormButton';
-import {BodyText} from '../components/StyledTexts';
+import React, { useState, useEffect } from 'react';
+import { SignUpBackground as Background } from '../../components/LoginBackground';
+import Title, { TitleHeader } from '../../components/AppTitle';
+import { Column, Row } from '../../components/Layout';
+import PageTitle from '../../components/PageTitle';
+import Container from '../../components/Container';
+import FormInput from '../../components/Input';
+import FormRadioInput from '../../components/FormRadioInput';
+import FormButton from '../../components/Button';
+import { BodyText } from '../../components/StyledTexts';
 
 const SignUpScreen = () => {
   // Variaveis para backend
@@ -152,11 +152,9 @@ const SignUpScreen = () => {
                   setField={setSenhaConfirma}
                   isProtected={true}
                 />
-                <FormButton
-                  buttonText="Cadastrar"
-                  onPress={handleClick}
-                  isLoading={loading}
-                />
+                <FormButton onPress={handleClick} isLoading={loading}>
+                  Cadastrar
+                </FormButton>
               </Column>
             </Container>
           </Column>
