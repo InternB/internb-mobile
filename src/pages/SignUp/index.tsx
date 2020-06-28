@@ -38,6 +38,7 @@ interface SignUpFormData {
 const SignUpScreen: React.FC = () => {
   const { goBack } = useNavigation();
 
+  const [loading, setLoading] = useState(false);
   const [fullname, setFullname] = useState('');
   const [cpf, setCPF] = useState('');
   const [email, setEmail] = useState('');
@@ -176,7 +177,9 @@ const SignUpScreen: React.FC = () => {
             </RadioButton.Group>
           </RadioContainer>
 
-          <Button onPress={handleRegistration}>Cadastrar</Button>
+          <Button onPress={handleRegistration} isLoading={!loading}>
+            Cadastrar
+          </Button>
         </Form>
 
         <BackButton onPress={() => goBack()}>

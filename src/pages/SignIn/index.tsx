@@ -16,6 +16,7 @@ import {
 } from './styles';
 
 import api from '../../services/api';
+import { useAuth } from '../../hooks/auth';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -30,12 +31,15 @@ interface SignInFormData {
 const LoginScreen: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  // const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { navigate } = useNavigation();
+  const { signIn } = useAuth();
 
   const handleLogin = useCallback(async () => {
     try {
+      setLoading(true);
+
       const data: SignInFormData = {
         email,
         password,
@@ -52,9 +56,7 @@ const LoginScreen: React.FC = () => {
         abortEarly: false,
       });
 
-      await api.post('sessions', data);
-
-      Alert.alert('Login', 'Autenticação realizada com sucesso!');
+      await signIn({ email, password });
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         // Sinalizar nos campos!
@@ -63,8 +65,10 @@ const LoginScreen: React.FC = () => {
         // Alerta na tela!
         console.log(err);
       }
+    } finally {
+      setLoading(false);
     }
-  }, [email, password]);
+  }, [email, password, setLoading]);
 
   return (
     <Container>
@@ -89,7 +93,9 @@ const LoginScreen: React.FC = () => {
           secureTextEntry
         />
 
-        <Button onPress={handleLogin}>Entrar</Button>
+        <Button onPress={handleLogin} isLoading={!loading}>
+          Entrar
+        </Button>
       </Form>
 
       <ForgotPassword>
