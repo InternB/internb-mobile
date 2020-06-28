@@ -1,4 +1,5 @@
 import React from 'react';
+import { ActivityIndicator } from 'react-native';
 import { RectButtonProperties } from 'react-native-gesture-handler';
 
 import { Container, ButtonText } from './styles';
@@ -12,15 +13,10 @@ const Button: React.FC<ButtonProps> = ({
   isLoading = false,
   ...rest
 }) => {
-  // let buttonStyle = styles;
-
-  // if (isLoading === true) {
-  //   buttonStyle = disabledButton;
-  // }
-
   return (
-    <Container {...rest}>
+    <Container {...rest} enabled={isLoading}>
       <ButtonText>{children}</ButtonText>
+      {!isLoading && <ActivityIndicator />}
     </Container>
   );
 };

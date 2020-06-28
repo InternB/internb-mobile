@@ -1,8 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import SignIn from '../pages/SignIn';
-import SignUp from '../pages/SignUp';
+import Dashboard from '../pages/Dashboard';
 
 const App = createStackNavigator();
 
@@ -13,8 +12,7 @@ const AppRoutes: React.FC = () => (
       cardStyle: { backgroundColor: '#333' },
     }}
   >
-    <App.Screen name="SignIn" component={SignIn} />
-    <App.Screen name="SignUp" component={SignUp} />
+    <App.Screen name="Dashboard" component={Dashboard} />
   </App.Navigator>
 );
 
