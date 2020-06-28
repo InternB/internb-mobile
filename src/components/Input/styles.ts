@@ -1,9 +1,9 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
-export const Container = styled.View`
+export const Container = styled.View<InputProps>`
   width: 100%;
-  height: 60px;
+  height: 50px;
   padding: 0 16px;
   background: #c5c5c5;
   border-radius: 10px;
@@ -15,7 +15,10 @@ export const Container = styled.View`
 `;
 
 export const TextInput = styled.TextInput`
-  width: 100%;
+  flex: 1;
+  font-size: 16px;
 `;
 
-export const Icon = styled(FeatherIcon)``;
+export const Icon = styled(FeatherIcon)`
+  margin-right: 10px;
+`;

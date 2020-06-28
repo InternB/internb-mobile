@@ -5,15 +5,16 @@ import { Container, TextInput, Icon } from './styles';
 
 interface InputProps extends TextInputProps {
   // name: string;
-  icon: string;
+  icon?: string;
+  containerStyle?: {};
 }
 
-const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
+const Input: React.FC<InputProps> = ({ icon, containerStyle, ...rest }) => {
   return (
-    <Container>
-      <TextInput name={name} {...rest} />
+    <Container style={containerStyle}>
+      <TextInput {...rest} />
 
-      <Icon name={icon} size={20} color="#333" />
+      {icon && <Icon name={icon} size={20} color="#333" />}
     </Container>
   );
 };

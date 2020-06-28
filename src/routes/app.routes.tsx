@@ -11,8 +11,10 @@ const AppRoutes: React.FC = () => (
     screenOptions={{
       headerShown: false,
       cardStyle: { backgroundColor: '#333' },
-    }}>
+    }}
+  >
     <App.Screen name="SignIn" component={SignIn} />
+    <App.Screen name="SignUp" component={SignUp} />
   </App.Navigator>
 );
 

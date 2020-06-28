@@ -1,13 +1,17 @@
 import React from 'react';
+import { RectButtonProperties } from 'react-native-gesture-handler';
 
 import { Container, ButtonText } from './styles';
 
-interface Props {
-  onPress: any;
+interface ButtonProps extends RectButtonProperties {
   isLoading?: boolean;
 }
 
-const Button: React.FC<Props> = ({ children, onPress, isLoading = false }) => {
+const Button: React.FC<ButtonProps> = ({
+  children,
+  isLoading = false,
+  ...rest
+}) => {
   // let buttonStyle = styles;
 
   // if (isLoading === true) {
@@ -15,7 +19,7 @@ const Button: React.FC<Props> = ({ children, onPress, isLoading = false }) => {
   // }
 
   return (
-    <Container onPress={onPress}>
+    <Container {...rest}>
       <ButtonText>{children}</ButtonText>
     </Container>
   );

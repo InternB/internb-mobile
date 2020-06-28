@@ -6,16 +6,13 @@ interface ButtonProps {
 }
 
 export const Container = styled(RectButton)`
-  border-width: 2px;
-  border-radius: 10px;
-  background: #c5c5c5;
-
+  width: 100%;
   height: 60px;
-  margin-top: 10px;
-
-  flex-direction: row;
-  align-items: center;
+  background: #c5c5c5;
+  border-radius: 10px;
+  margin-top: 8px;
   justify-content: center;
+  align-items: center;
 `;
 
 export const ButtonText = styled.Text`

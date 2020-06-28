@@ -1,173 +1,190 @@
-import React, { useState, useEffect } from 'react';
-import { SignUpBackground as Background } from '../../components/LoginBackground';
-import Title, { TitleHeader } from '../../components/AppTitle';
-import { Column, Row } from '../../components/Layout';
-import PageTitle from '../../components/PageTitle';
-import Container from '../../components/Container';
-import FormInput from '../../components/Input';
-import FormRadioInput from '../../components/FormRadioInput';
-import FormButton from '../../components/Button';
-import { BodyText } from '../../components/StyledTexts';
+import React, { useState, useCallback } from 'react';
+import Icon from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
+import * as Yup from 'yup';
 
-const SignUpScreen = () => {
-  // Variaveis para backend
-  const [nome, setNome] = useState<string>('');
-  const [cpf, setCpf] = useState<string>('');
-  const [telefone, setTelefone] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [senha, setSenha] = useState<string>('');
-  const [senhaConfirma, setSenhaConfirma] = useState<string>('');
-  const [perfil, setPerfil] = useState<number>(0);
+import { ScrollView } from 'react-native-gesture-handler';
+import { RadioButton } from 'react-native-paper';
 
-  // Variaveis para controle de render
-  const [tipoPerfil, setTipoPerfil] = useState<Array<boolean>>([
-    true,
-    false,
-    false,
-    false,
-  ]);
+import api from '../../services/api';
 
-  const [loading, setLoading] = useState<boolean>(false);
+import {
+  Container,
+  Logo,
+  Form,
+  RadioContainer,
+  RadioTitle,
+  RadioContent,
+  BackButton,
+  BackButtonText,
+} from './styles';
 
-  const handleClick = () => {
-    setLoading(true);
-    console.log(
-      `Cadastrando Nome: ${nome}, CPF: ${cpf}, Telefone: ${telefone}, E-mail: ${email}, Senha: ${senha}, Confirma Senha: ${senhaConfirma}, Tipo Perfil: ${perfil}`,
-    );
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  };
+import logoImg from '../../assets/images/logoUnB.png';
 
-  useEffect(() => {
-    for (let index = 0; index < tipoPerfil.length; index++) {
-      if (tipoPerfil[index] === true) {
-        setPerfil(index);
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import RadioInput from '../../components/RadioInput';
+
+interface SignUpFormData {
+  fullname: string;
+  cpf: string;
+  email: string;
+  phone: string;
+  password: string;
+  passwordConfirmation: string;
+  role: number;
+}
+
+const SignUpScreen: React.FC = () => {
+  const { goBack } = useNavigation();
+
+  const [fullname, setFullname] = useState('');
+  const [cpf, setCPF] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [role, setRole] = useState('0');
+
+  const handleRegistration = useCallback(async () => {
+    try {
+      const data: SignUpFormData = {
+        fullname,
+        cpf,
+        email,
+        phone,
+        password,
+        passwordConfirmation,
+        role: parseInt(role, 10),
+      };
+
+      const schema = Yup.object().shape({
+        fullname: Yup.string().required('Nome é obrigatório'),
+        cpf: Yup.string()
+          .required('CPF é obrigatório')
+          .length(11, 'CPF deve conter apenas números'),
+        email: Yup.string()
+          .email('E-mail inválido')
+          .required('E-mail é obrigatório'),
+        phone: Yup.string(),
+        password: Yup.string()
+          .required('Senha é obrigatória')
+          .min(6, 'Senha deve ter no mínimo 6 caracteres')
+          .max(12, 'Senha deve ter no máximo 12 caracteres'),
+        passwordConfirmation: Yup.string().oneOf(
+          [Yup.ref('password'), undefined],
+          'Senhas devem ser iguais',
+        ),
+        role: Yup.number()
+          .min(0, 'Papel deve estar entre 0 e 3')
+          .max(3, 'Papel deve estar entre 0 e 3'),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      // Remover depois
+      delete data.passwordConfirmation;
+
+      const { data: user } = await api.post('users', data);
+      goBack();
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        // Sinalizar nos campos!
+        console.log('Validation Error');
+      } else {
+        // Alerta na tela!
+        console.log(err);
       }
     }
-  }, [tipoPerfil]);
+  }, [
+    fullname,
+    cpf,
+    email,
+    phone,
+    password,
+    passwordConfirmation,
+    role,
+    goBack,
+  ]);
 
   return (
-    <>
-      <Background>
-        <TitleHeader>
-          <Title>App Name</Title>
-        </TitleHeader>
-        <Column height={'90%'} alingItems="center">
-          <Row width={'90%'} flex={1}>
-            <PageTitle color="#fff">Cadastro</PageTitle>
-          </Row>
+    <ScrollView
+      contentContainerStyle={{
+        paddingBottom: 30,
+        backgroundColor: '#f5f5f5',
+      }}
+    >
+      <Container>
+        <Logo source={logoImg} />
 
-          <Column width="90%" justifyContent="center" flex={5}>
-            <Container width="100%" height="90%">
-              <Column height="100%" justifyContent="space-evenly">
-                <FormInput
-                  inlineLabel={true}
-                  label="Nome"
-                  field={nome}
-                  setField={setNome}
-                  isProtected={false}
-                />
-                <FormInput
-                  inlineLabel={true}
-                  label="CPF"
-                  field={cpf}
-                  setField={setCpf}
-                  isProtected={false}
-                />
-                <FormInput
-                  inlineLabel={true}
-                  label="Telefone"
-                  field={telefone}
-                  setField={setTelefone}
-                  isProtected={false}
-                />
-                <FormInput
-                  inlineLabel={true}
-                  label="E-mail"
-                  field={email}
-                  setField={setEmail}
-                  isProtected={false}
-                />
-                <Column
-                  height="25%"
-                  width="100%"
-                  justifyContent="space-evenly"
-                  alingItems="center">
-                  <BodyText size={14}>
-                    Selecione o perfil de usuário apropriado:
-                  </BodyText>
-                  <Row width="65%" justifyContent="space-evenly">
-                    <FormRadioInput
-                      id={0}
-                      numberOfInputs={tipoPerfil.length}
-                      selected={tipoPerfil[0]}
-                      onPress={setTipoPerfil}
-                      size={14}
-                      label="Docente UnB"
-                      flex={4}
-                    />
-                    <FormRadioInput
-                      id={1}
-                      numberOfInputs={tipoPerfil.length}
-                      selected={tipoPerfil[1]}
-                      onPress={setTipoPerfil}
-                      size={14}
-                      label="Preceptor"
-                      flex={3}
-                    />
-                  </Row>
-                  <Row width="65%" justifyContent="space-around">
-                    <FormRadioInput
-                      id={2}
-                      numberOfInputs={tipoPerfil.length}
-                      selected={tipoPerfil[2]}
-                      onPress={setTipoPerfil}
-                      size={14}
-                      label="Discente"
-                      flex={4}
-                    />
-                    <FormRadioInput
-                      id={3}
-                      numberOfInputs={tipoPerfil.length}
-                      selected={tipoPerfil[3]}
-                      onPress={setTipoPerfil}
-                      size={14}
-                      label="Administrador"
-                      flex={3}
-                    />
-                  </Row>
-                </Column>
-                <FormInput
-                  inlineLabel={true}
-                  label="Senha"
-                  field={senha}
-                  setField={setSenha}
-                  isProtected={true}
-                />
-                <FormInput
-                  inlineLabel={true}
-                  label="Confirmar Senha"
-                  field={senhaConfirma}
-                  setField={setSenhaConfirma}
-                  isProtected={true}
-                />
-                <FormButton onPress={handleClick} isLoading={loading}>
-                  Cadastrar
-                </FormButton>
-              </Column>
-            </Container>
-          </Column>
+        <Form>
+          <Input
+            icon="user"
+            placeholder="Nome Completo"
+            value={fullname}
+            onChangeText={(value) => setFullname(value)}
+          />
+          <Input
+            icon="archive"
+            placeholder="CPF"
+            value={cpf}
+            onChangeText={(value) => setCPF(value)}
+          />
+          <Input
+            icon="mail"
+            placeholder="E-mail"
+            value={email}
+            onChangeText={(value) => setEmail(value)}
+          />
+          <Input
+            icon="phone"
+            placeholder="Telefone"
+            value={phone}
+            onChangeText={(value) => setPhone(value)}
+          />
 
-          <Row width="80%" flex={2}>
-            <BodyText size={16} color="#fff">
-              A solicitação da sua inscrição será enviada para um administrador
-              do sistema para avaliação.
-            </BodyText>
-          </Row>
-        </Column>
-      </Background>
-    </>
+          <Input
+            icon="lock"
+            placeholder="Senha"
+            containerStyle={{ marginTop: 30 }}
+            secureTextEntry
+            value={password}
+            onChangeText={(value) => setPassword(value)}
+          />
+          <Input
+            icon="lock"
+            placeholder="Confirmar senha"
+            secureTextEntry
+            value={passwordConfirmation}
+            onChangeText={(value) => setPasswordConfirmation(value)}
+          />
+
+          <RadioContainer>
+            <RadioTitle>Você é:</RadioTitle>
+            <RadioButton.Group
+              onValueChange={(value) => setRole(value)}
+              value={role}
+            >
+              <RadioContent>
+                <RadioInput value="0">Administrador</RadioInput>
+                <RadioInput value="1">Orientador</RadioInput>
+                <RadioInput value="2">Professor</RadioInput>
+                <RadioInput value="3">Estudante</RadioInput>
+              </RadioContent>
+            </RadioButton.Group>
+          </RadioContainer>
+
+          <Button onPress={handleRegistration}>Cadastrar</Button>
+        </Form>
+
+        <BackButton onPress={() => goBack()}>
+          <Icon name="arrow-left" size={20} color="#333" />
+          <BackButtonText>Voltar</BackButtonText>
+        </BackButton>
+      </Container>
+    </ScrollView>
   );
 };
 
