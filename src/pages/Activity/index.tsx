@@ -11,26 +11,24 @@ interface Props {
   navigation: any;
 }
 
-const Dashboard: React.FC<Props> = ({ navigation }) => {
+const Activity: React.FC<Props> = ({ navigation }) => {
   return (
     <>
       <OutOfBoundsFill />
       <Container>
-        <Header title="Home" />
+        <Header title="Atividades" />
         <Body>
           <Text style={{ fontSize: 30, fontWeight: 'bold' }}>
             Objetivos da página
           </Text>
           <Text style={{ fontSize: 14, textAlign: 'center' }}>
-            Notícias sobre o App (publicadas pelo admin no estilo de um CMS
-            simples); Orientações de uso (talvez só da primeira vez/enquanto não
-            completar o tutorial);
+            Feed com as atividades que o aluno cumpriu
           </Text>
         </Body>
-        <Navbar currentTab={2} navigation={navigation} />
+        <Navbar currentTab={1} navigation={navigation} />
       </Container>
     </>
   );
 };
 
-export default Dashboard;
+export default Activity;

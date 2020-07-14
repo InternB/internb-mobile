@@ -11,12 +11,12 @@ interface Props {
   navigation: any;
 }
 
-const Dashboard: React.FC<Props> = ({ navigation }) => {
+const Internship: React.FC<Props> = ({ navigation }) => {
   return (
     <>
       <OutOfBoundsFill />
       <Container>
-        <Header title="Home" />
+        <Header title="Estágio" />
         <Body>
           <Text style={{ fontSize: 30, fontWeight: 'bold' }}>
             Objetivos da página
@@ -27,10 +27,10 @@ const Dashboard: React.FC<Props> = ({ navigation }) => {
             completar o tutorial);
           </Text>
         </Body>
-        <Navbar currentTab={2} navigation={navigation} />
+        <Navbar currentTab={3} navigation={navigation} />
       </Container>
     </>
   );
 };
 
-export default Dashboard;
+export default Internship;
