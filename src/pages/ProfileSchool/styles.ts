@@ -21,11 +21,3 @@ export const Body = styled.View`
   align-items: center;
   justify-content: center;
 `;
-
-export const ButtonsArea = styled.View`
-  width: 100%;
-  height: 60%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-`;

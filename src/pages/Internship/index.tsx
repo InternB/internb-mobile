@@ -22,9 +22,8 @@ const Internship: React.FC<Props> = ({ navigation }) => {
             Objetivos da página
           </Text>
           <Text style={{ fontSize: 14, textAlign: 'center' }}>
-            Notícias sobre o App (publicadas pelo admin no estilo de um CMS
-            simples); Orientações de uso (talvez só da primeira vez/enquanto não
-            completar o tutorial);
+            Registrar informações sobre o estagio: grade horaria, plano de
+            trabalho, fotos, duração e tipo de estagio.
           </Text>
         </Body>
         <Navbar currentTab={3} navigation={navigation} />
