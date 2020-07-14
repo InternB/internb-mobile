@@ -14,7 +14,11 @@ const ProfileOrientation: React.FC<Props> = ({ navigation }) => {
     <>
       <OutOfBoundsFill />
       <Container>
-        <Header title="Informações de Orientação" showArrow />
+        <Header
+          navigation={navigation}
+          title="Informações de Orientação"
+          showArrow
+        />
         <Body />
         <Navbar currentTab={0} navigation={navigation} />
       </Container>

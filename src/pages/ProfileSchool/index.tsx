@@ -14,7 +14,11 @@ const ProfileSchool: React.FC<Props> = ({ navigation }) => {
     <>
       <OutOfBoundsFill />
       <Container>
-        <Header title="Informações de Ensino" showArrow />
+        <Header
+          navigation={navigation}
+          title="Informações de Ensino"
+          showArrow
+        />
         <Body />
         <Navbar currentTab={0} navigation={navigation} />
       </Container>
