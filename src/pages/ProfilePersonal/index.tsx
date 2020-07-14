@@ -14,7 +14,11 @@ const ProfilePersonal: React.FC<Props> = ({ navigation }) => {
     <>
       <OutOfBoundsFill />
       <Container>
-        <Header title="Informações Pessoais" showArrow />
+        <Header
+          navigation={navigation}
+          title="Informações Pessoais"
+          showArrow
+        />
         <Body />
         <Navbar currentTab={0} navigation={navigation} />
       </Container>
