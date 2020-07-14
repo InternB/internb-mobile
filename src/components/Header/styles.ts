@@ -13,7 +13,6 @@ export const Background = styled.View`
 export const Title = styled.Text`
   flex: 14;
   font-weight: bold;
-  font-family: sans-serif;
   color: #f5f5f5;
   font-size: 29px;
   text-align: center;
