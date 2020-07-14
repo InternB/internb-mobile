@@ -19,7 +19,7 @@ import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 
 import Input from '../../components/Input';
-import Button from '../../components/Button';
+import Button from '../../components/AuthButton';
 
 import logoImg from '../../assets/images/logoUnB.png';
 

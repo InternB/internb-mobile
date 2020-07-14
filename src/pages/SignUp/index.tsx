@@ -22,7 +22,7 @@ import {
 import logoImg from '../../assets/images/logoUnB.png';
 
 import Input from '../../components/Input';
-import Button from '../../components/Button';
+import Button from '../../components/AuthButton';
 import RadioInput from '../../components/RadioInput';
 
 interface SignUpFormData {

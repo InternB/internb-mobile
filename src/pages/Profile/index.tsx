@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { Text } from 'react-native';
-
-import { Container, Body, OutOfBoundsFill } from './styles';
+import { Container, Body, OutOfBoundsFill, ButtonsArea } from './styles';
 
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
+import AppButton from '../../components/AppButton';
 
 interface Props {
   navigation: any;
@@ -17,7 +16,25 @@ const Profile: React.FC<Props> = ({ navigation }) => {
       <OutOfBoundsFill />
       <Container>
         <Header title="Informações" />
-        <Body></Body>
+        <Body>
+          <ButtonsArea>
+            <AppButton
+              onPress={() => navigation.navigate('Informações Pessoais')}
+            >
+              Informações Pessoais
+            </AppButton>
+            <AppButton
+              onPress={() => navigation.navigate('Informações de Ensino')}
+            >
+              Informações de Ensino
+            </AppButton>
+            <AppButton
+              onPress={() => navigation.navigate('Informações de Orientação')}
+            >
+              Informações de Orientação
+            </AppButton>
+          </ButtonsArea>
+        </Body>
         <Navbar currentTab={0} navigation={navigation} />
       </Container>
     </>
