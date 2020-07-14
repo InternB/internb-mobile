@@ -5,9 +5,10 @@ import { Background, TabButton, IconEntypo, IconFeather } from './styles';
 
 interface Props {
   currentTab: number;
+  navigation: any;
 }
 
-const Navbar: React.FC<Props> = ({ currentTab }) => {
+const Navbar: React.FC<Props> = ({ currentTab, navigation }) => {
   const [tabIndexes, setTabIndexes] = useState<Array<boolean>>([
     false,
     false,
@@ -29,19 +30,19 @@ const Navbar: React.FC<Props> = ({ currentTab }) => {
   return (
     <>
       <Background>
-        <TabButton>
+        <TabButton onPress={() => navigation.navigate('Informações')}>
           <IconFeather name="user" selected={tabIndexes[0]} />
         </TabButton>
-        <TabButton>
+        <TabButton onPress={() => navigation.navigate('Atividades')}>
           <IconEntypo name="list" selected={tabIndexes[1]} />
         </TabButton>
-        <TabButton>
+        <TabButton onPress={() => navigation.navigate('Home')}>
           <IconEntypo name="home" selected={tabIndexes[2]} />
         </TabButton>
-        <TabButton>
+        <TabButton onPress={() => navigation.navigate('Estágio')}>
           <IconEntypo name="briefcase" selected={tabIndexes[3]} />
         </TabButton>
-        <TabButton>
+        <TabButton onPress={() => navigation.navigate('Documentação')}>
           <IconFeather name="file" selected={tabIndexes[4]} />
         </TabButton>
       </Background>
