@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
 import React, { useState, useCallback } from 'react';
 import Icon from 'react-native-vector-icons/Feather';
+import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
 
@@ -38,6 +40,7 @@ interface SignUpFormData {
 const SignUpScreen: React.FC = () => {
   const { goBack } = useNavigation();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false);
   const [fullname, setFullname] = useState('');
   const [cpf, setCPF] = useState('');
@@ -88,6 +91,7 @@ const SignUpScreen: React.FC = () => {
       // Remover depois
       delete data.passwordConfirmation;
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data: user } = await api.post('users', data);
       goBack();
     } catch (err) {
@@ -123,44 +127,44 @@ const SignUpScreen: React.FC = () => {
         <Form>
           <Input
             icon="user"
-            placeholder="Nome Completo"
+            label="Nome Completo"
             value={fullname}
-            onChangeText={(value) => setFullname(value)}
+            onChangeText={(value: string) => setFullname(value)}
           />
           <Input
             icon="archive"
-            placeholder="CPF"
+            label="CPF"
             value={cpf}
-            onChangeText={(value) => setCPF(value)}
+            onChangeText={(value: string) => setCPF(value)}
           />
           <Input
             icon="mail"
-            placeholder="E-mail"
+            label="E-mail"
             value={email}
-            onChangeText={(value) => setEmail(value)}
+            onChangeText={(value: string) => setEmail(value)}
           />
           <Input
             icon="phone"
-            placeholder="Telefone"
+            label="Telefone"
             value={phone}
-            onChangeText={(value) => setPhone(value)}
+            onChangeText={(value: string) => setPhone(value)}
           />
-
-          <Input
-            icon="lock"
-            placeholder="Senha"
-            containerStyle={{ marginTop: 30 }}
-            secureTextEntry
-            value={password}
-            onChangeText={(value) => setPassword(value)}
-          />
-          <Input
-            icon="lock"
-            placeholder="Confirmar senha"
-            secureTextEntry
-            value={passwordConfirmation}
-            onChangeText={(value) => setPasswordConfirmation(value)}
-          />
+          <View style={{ marginTop: 50 }}>
+            <Input
+              icon="lock"
+              label="Senha"
+              secureTextEntry
+              value={password}
+              onChangeText={(value: string) => setPassword(value)}
+            />
+            <Input
+              icon="lock"
+              label="Confirmar senha"
+              secureTextEntry
+              value={passwordConfirmation}
+              onChangeText={(value: string) => setPasswordConfirmation(value)}
+            />
+          </View>
 
           <RadioContainer>
             <RadioTitle>Você é:</RadioTitle>

@@ -1,24 +1,67 @@
-import styled, { css } from 'styled-components/native';
+import styled from 'styled-components/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
-export const Container = styled.View<InputProps>`
+const Styles = {
+  focusedColor: '#99bbff',
+  unfocusedColor: '#9e9e9e',
+  fontSize: 16,
+};
+
+interface InputProps {
+  focus?: boolean;
+  hasContent?: boolean;
+}
+
+export const Border = styled.View<InputProps>`
+  border-width: 2px;
+  border-color: ${(props) =>
+    props.focus === true ? Styles.focusedColor : Styles.unfocusedColor};
+  border-style: solid;
   width: 100%;
   height: 50px;
   padding: 0 16px;
-  background: #c5c5c5;
+  background: white;
   border-radius: 10px;
   margin-bottom: 8px;
+  display: flex;
   flex-direction: row;
-  align-items: center;
-  border-width: 2px;
-  border-color: #333;
+  justify-content: flex-start;
+  margin: 5px;
 `;
 
-export const TextInput = styled.TextInput`
+export const Label = styled.Text<InputProps>`
+  color: ${(props) =>
+    props.focus === true ? Styles.focusedColor : Styles.unfocusedColor};
+  font-size: ${(props) =>
+    props.focus === true || props.hasContent === true
+      ? `${Styles.fontSize * 0.66}px`
+      : `${Styles.fontSize}px`};
+  margin-top: ${(props) =>
+    props.focus === true || props.hasContent === true ? '-10px' : '10px'};
+  margin-left: 16px;
+  text-align: justify;
+  position: absolute;
+  background-color: transparent;
   flex: 1;
+`;
+
+export const BorderHole = styled.Text<InputProps>`
+  position: absolute;
   font-size: 16px;
+  margin-top: ${(props) =>
+    props.focus === true || props.hasContent === true ? '-2px' : '0px'};
+  margin-left: 12px;
+  background-color: white;
+  color: transparent;
+  flex: 1;
+`;
+
+export const TextField = styled.TextInput`
+  flex: 9;
 `;
 
 export const Icon = styled(FeatherIcon)`
-  margin-right: 10px;
+  flex: 1;
+  align-self: center;
+  color: ${Styles.unfocusedColor};
 `;
