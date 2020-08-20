@@ -18,8 +18,8 @@ const Routes: React.FC = () => {
   }
 
   // hardcode pra testar
-  // return user ? <AppRoutes /> : <AuthRoutes />;
-  return <AppRoutes />;
+  return user ? <AppRoutes /> : <AuthRoutes />;
+  // return <AppRoutes />;
 };
 
 export default Routes;

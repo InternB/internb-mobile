@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 import React, { useState, useCallback } from 'react';
-import { View, Image, Alert } from 'react-native';
+import { View, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import * as Yup from 'yup';
@@ -15,7 +16,6 @@ import {
   CreateAccountButtonText,
 } from './styles';
 
-import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 
 import Input from '../../components/Input';
@@ -68,6 +68,7 @@ const LoginScreen: React.FC = () => {
     } finally {
       setLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email, password, setLoading]);
 
   return (
@@ -83,13 +84,13 @@ const LoginScreen: React.FC = () => {
           icon="mail"
           value={email}
           onChangeText={(value) => setEmail(value)}
-          placeholder="E-mail"
+          label="E-mail"
         />
         <Input
           icon="lock"
           value={password}
           onChangeText={(value) => setPassword(value)}
-          placeholder="Senha"
+          label="Senha"
           secureTextEntry
         />
 

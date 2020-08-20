@@ -8,6 +8,7 @@ import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
 
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any;
 }
 
@@ -26,7 +27,7 @@ const Internship: React.FC<Props> = ({ navigation }) => {
             trabalho, fotos, duração e tipo de estagio.
           </Text>
         </Body>
-        <Navbar currentTab={3} navigation={navigation} />
+        <Navbar currentTab={0} navigation={navigation} />
       </Container>
     </>
   );

@@ -22,10 +22,37 @@ export const Body = styled.View`
   justify-content: center;
 `;
 
+export const ProfileArea = styled.View`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+`;
+
+export const NameText = styled.Text`
+  color: #2526a5;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin: 3px;
+`;
+
+export const InfoText = styled.Text`
+  color: #2526a5;
+  font-size: 18px;
+  font-weight: 300;
+  text-align: center;
+  margin: 1px;
+`;
+
 export const ButtonsArea = styled.View`
   width: 100%;
-  height: 60%;
   display: flex;
+  flex-direction: column;
+  flex: 3;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
 `;
