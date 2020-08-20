@@ -6,6 +6,7 @@ import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
 
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any;
 }
 
@@ -14,13 +15,9 @@ const ProfilePersonal: React.FC<Props> = ({ navigation }) => {
     <>
       <OutOfBoundsFill />
       <Container>
-        <Header
-          navigation={navigation}
-          title="Informações Pessoais"
-          showArrow
-        />
+        <Header navigation={navigation} title="Perfil Pessoal" showArrow />
         <Body />
-        <Navbar currentTab={0} navigation={navigation} />
+        <Navbar currentTab={2} navigation={navigation} />
       </Container>
     </>
   );

@@ -8,6 +8,7 @@ import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
 
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any;
 }
 
@@ -27,7 +28,7 @@ const Dashboard: React.FC<Props> = ({ navigation }) => {
             completar o tutorial);
           </Text>
         </Body>
-        <Navbar currentTab={2} navigation={navigation} />
+        <Navbar currentTab={1} navigation={navigation} />
       </Container>
     </>
   );
