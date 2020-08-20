@@ -1,9 +1,18 @@
 import React from 'react';
 
-import { Container, Body, OutOfBoundsFill, ButtonsArea } from './styles';
+import {
+  Container,
+  Body,
+  OutOfBoundsFill,
+  ButtonsArea,
+  ProfileArea,
+  NameText,
+  InfoText,
+} from './styles';
 
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
+import Avatar from '../../components/UserAvatar';
 import AppButton from '../../components/AppButton';
 
 interface Props {
@@ -18,12 +27,24 @@ const Profile: React.FC<Props> = ({ navigation }) => {
       <Container>
         <Header title="Perfil" />
         <Body>
+          <ProfileArea>
+            <Avatar />
+            <NameText>Nome Completo do Aluno</NameText>
+            <InfoText>Curso X</InfoText>
+            <InfoText>00/0000000</InfoText>
+          </ProfileArea>
           <ButtonsArea>
             <AppButton onPress={() => navigation.navigate('Perfil Pessoal')}>
               Perfil Pessoal
             </AppButton>
             <AppButton onPress={() => navigation.navigate('Documentação')}>
+              Turmas
+            </AppButton>
+            <AppButton onPress={() => navigation.navigate('Documentação')}>
               Documentação
+            </AppButton>
+            <AppButton onPress={() => navigation.navigate('Documentação')}>
+              Estágio
             </AppButton>
           </ButtonsArea>
         </Body>
