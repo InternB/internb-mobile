@@ -2,6 +2,10 @@ import styled, { css } from 'styled-components/native';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
+interface NavbarProps {
+  selected?: boolean;
+}
+
 export const Background = styled.View`
   height: 10%;
   width: 100%;
@@ -19,30 +23,44 @@ export const TabButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export const IconEntypo = styled(EntypoIcon)`
+export const IconEntypo = styled(EntypoIcon)<NavbarProps>`
   ${(props) => {
     if (props.selected === true) {
       return css`
-        font-size: 34px;
+        font-size: 42px;
         color: #1c1e83;
       `;
     }
     return css`
-      font-size: 22px;
+      font-size: 32px;
       color: #b6b6b6;
     `;
   }}
 `;
-export const IconFeather = styled(FeatherIcon)`
+export const IconFeather = styled(FeatherIcon)<NavbarProps>`
   ${(props) => {
     if (props.selected === true) {
       return css`
-        font-size: 34px;
+        font-size: 42px;
         color: #1c1e83;
       `;
     }
     return css`
-      font-size: 22px;
+      font-size: 32px;
+      color: #b6b6b6;
+    `;
+  }}
+`;
+
+export const ButtonLabel = styled.Text<NavbarProps>`
+  font-size: 14px;
+  ${(props) => {
+    if (props.selected === true) {
+      return css`
+        color: #1c1e83;
+      `;
+    }
+    return css`
       color: #b6b6b6;
     `;
   }}
