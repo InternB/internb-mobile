@@ -21,3 +21,8 @@ export const Body = styled.View`
   align-items: center;
   justify-content: center;
 `;
+
+export const FormArea = styled.View`
+  width: 75%;
+  margin: 30px 0;
+`;

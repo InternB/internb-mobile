@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
 const Styles = {
-  focusedColor: '#99bbff',
+  focusedColor: '#8789d5',
   unfocusedColor: '#9e9e9e',
   fontSize: 16,
 };
@@ -56,8 +56,10 @@ export const BorderHole = styled.Text<InputProps>`
   flex: 1;
 `;
 
-export const TextField = styled.TextInput`
+export const TextField = styled.TextInput<{ editable?: boolean }>`
   flex: 9;
+  color: ${(props) =>
+    props.editable === false ? Styles.unfocusedColor : 'black'};
 `;
 
 export const Icon = styled(FeatherIcon)`

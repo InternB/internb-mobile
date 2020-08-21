@@ -13,7 +13,7 @@ import {
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
 import Avatar from '../../components/UserAvatar';
-import AppButton from '../../components/AppButton';
+import AppButton from '../../components/NavigationButton';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
