@@ -26,6 +26,7 @@ export const Border = styled.View<InputProps>`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-self: flex-start;
   margin: 5px;
 `;
 

@@ -6,6 +6,7 @@ import Dashboard from '../pages/Dashboard';
 import Internship from '../pages/Internship';
 import ProfileMain from '../pages/Profile';
 import ProfilePersonal from '../pages/ProfilePersonal';
+import Classes from '../pages/Classes';
 import Documentation from '../pages/Documentation';
 
 const Stack = createStackNavigator();
@@ -19,6 +20,7 @@ const NestedProfile: React.FC = () => (
   >
     <Stack.Screen name="Perfil" component={ProfileMain} />
     <Stack.Screen name="Perfil Pessoal" component={ProfilePersonal} />
+    <Stack.Screen name="Turmas" component={Classes} />
     <Stack.Screen name="Documentação" component={Documentation} />
   </Stack.Navigator>
 );
