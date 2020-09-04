@@ -17,7 +17,7 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const FixedArea = styled.View`
-  width: 80%;
+  width: 75%;
   height: 15%;
   display: flex;
   align-items: center;

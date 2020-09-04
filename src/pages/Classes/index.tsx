@@ -7,6 +7,7 @@ import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
 import { SubSectionTitle } from '../../components/Texts';
 import Input from '../../components/Input';
+import EnroledClass from '../../components/EnroledClass';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -55,6 +56,13 @@ const Classes: React.FC<Props> = ({ navigation }) => {
             <>
               <SubSectionTitle>Turmas Matriculadas</SubSectionTitle>
               {/* Lista de turmas ja matriculadas */}
+              <EnroledClass />
+              <EnroledClass
+                classroomName="Sociedade e Informática - Turma B"
+                professor="José Campos da Silva"
+                subjectName="Sociedade e Informática"
+                subjectCode="CIC9391"
+              />
             </>
           ) : (
             <>
