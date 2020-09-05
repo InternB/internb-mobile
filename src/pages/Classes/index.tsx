@@ -8,6 +8,7 @@ import Header from '../../components/Header';
 import { SubSectionTitle } from '../../components/Texts';
 import Input from '../../components/Input';
 import EnroledClass from '../../components/EnroledClass';
+import AvailableClass from '../../components/AvailableClass';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -75,6 +76,32 @@ const Classes: React.FC<Props> = ({ navigation }) => {
                 <>
                   <SubSectionTitle>Turmas:</SubSectionTitle>
                   {/* Lista de turmas para se matricular */}
+                  <AvailableClass
+                    subjectName="Introdução à Ciência da Computação"
+                    subjectCode="CIC1298"
+                  />
+                  <AvailableClass
+                    subjectName="Autômatos e Computabilidade"
+                    subjectCode="CIC9476"
+                  />
+                  <AvailableClass
+                    subjectName="Software Básico"
+                    subjectCode="CIC4590"
+                  />
+                  <AvailableClass
+                    subjectName="Tópicos Avançados em Computação"
+                    subjectCode="CIC3395"
+                  />
+                  <AvailableClass
+                    subjectName="Estágio Obrigatório"
+                    subjectCode="CIC1113"
+                  />
+                  <AvailableClass />
+                  <AvailableClass />
+                  <AvailableClass />
+                  <AvailableClass />
+                  <AvailableClass />
+                  <AvailableClass />
                 </>
               )}
             </>

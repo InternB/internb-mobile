@@ -50,6 +50,7 @@ export const SubjectInformation = styled.View<Props>`
   border-bottom-width: 4px;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
+  background-color: #ffffff;
   width: 85%;
   position: relative;
   margin: -10px 0 10px 0;
@@ -94,10 +95,9 @@ export const StudentListItem = styled.View`
   width: 100%;
   height: 30px;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: transparent;
   border-style: solid;
   border-color: #2526a5;
-  border-width: 1px;
-  border-right-width: 0px;
+  border-top-width: 1px;
   border-left-width: 0px;
 `;
