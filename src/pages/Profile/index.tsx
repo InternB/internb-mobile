@@ -43,7 +43,7 @@ const Profile: React.FC<Props> = ({ navigation }) => {
             <AppButton onPress={() => navigation.navigate('Documentação')}>
               Documentação
             </AppButton>
-            <AppButton onPress={() => navigation.navigate('Documentação')}>
+            <AppButton onPress={() => navigation.navigate('Editar Estágio')}>
               Estágio
             </AppButton>
           </ButtonsArea>

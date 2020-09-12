@@ -8,11 +8,13 @@ import ProfileMain from '../pages/Profile';
 import ProfilePersonal from '../pages/ProfilePersonal';
 import Classes from '../pages/Classes';
 import Documentation from '../pages/Documentation';
+import InternshipEdit from '../pages/InternshipEdit';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 // nested navigators components
+// profile
 const NestedProfile: React.FC = () => (
   <Stack.Navigator
     initialRouteName="Perfil"
@@ -22,9 +24,11 @@ const NestedProfile: React.FC = () => (
     <Stack.Screen name="Perfil Pessoal" component={ProfilePersonal} />
     <Stack.Screen name="Turmas" component={Classes} />
     <Stack.Screen name="Documentação" component={Documentation} />
+    <Stack.Screen name="Editar Estágio" component={InternshipEdit} />
   </Stack.Navigator>
 );
 
+// main app routes
 const AppRoutes: React.FC = () => (
   <Tab.Navigator
     initialRouteName="Home"
