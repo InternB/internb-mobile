@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
-import { Container, ScrollArea, OutOfBoundsFill, FixedArea } from './styles';
+import {
+  Container,
+  ScrollArea,
+  OutOfBoundsFill,
+  FixedArea,
+  TitleArea,
+} from './styles';
 
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
@@ -55,7 +61,9 @@ const Classes: React.FC<Props> = ({ navigation }) => {
         <ScrollArea>
           {!classroomSearch ? (
             <>
-              <SubSectionTitle>Turmas Matriculadas</SubSectionTitle>
+              <TitleArea>
+                <SubSectionTitle>Turmas Matriculadas</SubSectionTitle>
+              </TitleArea>
               {/* Lista de turmas ja matriculadas */}
               <EnroledClass />
               <EnroledClass
@@ -69,12 +77,16 @@ const Classes: React.FC<Props> = ({ navigation }) => {
             <>
               {loadingClassrooms ? (
                 <>
-                  <SubSectionTitle>Turmas:</SubSectionTitle>
+                  <TitleArea>
+                    <SubSectionTitle>Turmas:</SubSectionTitle>
+                  </TitleArea>
                   <ActivityIndicator style={{ marginTop: '10%' }} size={10} />
                 </>
               ) : (
                 <>
-                  <SubSectionTitle>Turmas:</SubSectionTitle>
+                  <TitleArea>
+                    <SubSectionTitle>Turmas:</SubSectionTitle>
+                  </TitleArea>
                   {/* Lista de turmas para se matricular */}
                   <AvailableClass
                     subjectName="Introdução à Ciência da Computação"

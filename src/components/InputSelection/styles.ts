@@ -9,7 +9,8 @@ export const Border = styled.View`
   height: 50px;
   background: white;
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-top: 6px;
+  margin-bottom: 8px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -35,7 +36,7 @@ export const ListBackground = styled.ScrollView<{ expanded: boolean }>`
   align-self: center;
   max-height: 200px;
   background-color: #ffffff;
-  margin-top: -11px;
+  margin-top: -9px;
   margin-bottom: 10px;
   border-color: #4d4bae;
   border-width: 1px;
@@ -50,6 +51,8 @@ export const ListItem = styled.TouchableOpacity<{ selected?: boolean }>`
   align-items: flex-start;
   justify-content: center;
   padding-left: 5px;
+  border-top-width: 1px;
+  border-top-color: #56557e;
 `;
 
 export const IconContainer = styled.TouchableOpacity`

@@ -16,16 +16,17 @@ interface ListItemData {
 
 interface Props {
   itemsList?: Array<ListItemData>;
-  startingSelectedValueIndex?: number;
+  index: number;
+  setIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const InputSelection: React.FC<Props> = ({
   itemsList = [],
-  startingSelectedValueIndex = 0,
+  index = 0,
+  setIndex,
 }) => {
   const [expanded, setExpanded] = useState<boolean>(false);
   let selected = false;
-  const [index, setIndex] = useState<number>(startingSelectedValueIndex);
   const [selectedValue, setSelectedValue] = useState<string>('');
 
   useEffect(() => {

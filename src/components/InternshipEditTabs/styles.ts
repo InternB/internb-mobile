@@ -32,7 +32,6 @@ export const TabsArea = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   showsHorizontalScrollIndicator: false,
 }))`
-  margin-bottom: 10px;
 `;
 
 export const Tab = styled.TouchableOpacity<TabProps>`

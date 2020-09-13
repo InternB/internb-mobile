@@ -33,3 +33,8 @@ export const ScrollArea = styled.ScrollView.attrs(() => ({
   width: 100%;
   display: flex;
 `;
+
+export const TitleArea = styled.View`
+  align-self: flex-start;
+  margin: 0 6% 5%;
+`;

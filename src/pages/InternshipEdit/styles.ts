@@ -21,4 +21,11 @@ export const Body = styled.ScrollView.attrs(() => ({
 }))`
   width: 100%;
   display: flex;
+  padding-top: 30px;
+`;
+
+export const SelectionInputsContainer = styled.View`
+  width: 60%;
+  align-self: flex-start;
+  margin: 0px 0px 10px 25px;
 `;
