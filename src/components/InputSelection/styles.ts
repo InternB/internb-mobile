@@ -1,13 +1,19 @@
 import styled from 'styled-components/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
-export const Border = styled.View`
+interface Props {
+  isDisabled?: boolean;
+}
+
+export const Border = styled.View<Props>`
   border-width: 2px;
-  border-color: #4d4bae;
+  border-color: ${(props) =>
+    props.isDisabled === true ? '#666666' : '#4d4bae'};
   border-style: solid;
+  background-color: ${(props) =>
+    props.isDisabled === true ? '#33333344' : '#ffffff'};
   width: 100%;
   height: 50px;
-  background: white;
   border-radius: 10px;
   margin-top: 6px;
   margin-bottom: 8px;
@@ -24,12 +30,14 @@ export const ContentField = styled.View`
   padding-left: 5px;
 `;
 
-export const ContentText = styled.Text`
+export const ContentText = styled.Text<Props>`
   font-size: 16px;
-  color: #000000;
+  color: ${(props) => (props.isDisabled === true ? '#666666' : '#000000')};
 `;
 
-export const ListBackground = styled.ScrollView<{ expanded: boolean }>`
+export const ListBackground = styled.ScrollView.attrs(() => ({
+  nestedScrollEnabled: true,
+}))<{ expanded: boolean }>`
   display: ${(props) => (props.expanded === true ? 'flex' : 'none')};
   position: relative;
   width: 90%;
@@ -55,14 +63,15 @@ export const ListItem = styled.TouchableOpacity<{ selected?: boolean }>`
   border-top-color: #56557e;
 `;
 
-export const IconContainer = styled.TouchableOpacity`
+export const IconContainer = styled.TouchableOpacity<Props>`
   flex: 1;
   border-left-width: 2px;
-  border-left-color: #4d4bae;
+  border-left-color: ${(props) =>
+    props.isDisabled === true ? '#666666' : '#4d4bae'};
   align-items: center;
   justify-content: center;
 `;
 
-export const Icon = styled(FeatherIcon)`
-  color: #4d4bae;
+export const Icon = styled(FeatherIcon)<Props>`
+  color: ${(props) => (props.isDisabled === true ? '#666666' : '#4d4bae')};
 `;

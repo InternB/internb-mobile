@@ -2,8 +2,8 @@ import styled from 'styled-components/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
 const Styles = {
-  focusedColor: '#8789d5',
-  unfocusedColor: '#9e9e9e',
+  focusedColor: '#4d4bae',
+  unfocusedColor: '#56557e',
   fontSize: 16,
 };
 

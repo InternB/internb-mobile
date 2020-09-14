@@ -18,12 +18,14 @@ interface Props {
   itemsList?: Array<ListItemData>;
   index: number;
   setIndex: React.Dispatch<React.SetStateAction<number>>;
+  disabled?: boolean;
 }
 
 const InputSelection: React.FC<Props> = ({
   itemsList = [],
   index = 0,
   setIndex,
+  disabled = false,
 }) => {
   const [expanded, setExpanded] = useState<boolean>(false);
   let selected = false;
@@ -37,21 +39,30 @@ const InputSelection: React.FC<Props> = ({
     }
   }, [index, itemsList]);
 
+  useEffect(() => {
+    if (disabled) {
+      setExpanded(false);
+    }
+  }, [disabled]);
+
   return (
     <>
-      <Border>
+      <Border isDisabled={disabled}>
         <ContentField>
-          <ContentText>{selectedValue}</ContentText>
+          <ContentText isDisabled={disabled}>{selectedValue}</ContentText>
         </ContentField>
         <IconContainer
+          isDisabled={disabled}
           onPress={() => {
-            setExpanded(!expanded);
+            if (!disabled) {
+              setExpanded(!expanded);
+            }
           }}
           onBlur={() => {
             setExpanded(false);
           }}
         >
-          <Icon name="chevron-down" size={25} />
+          <Icon isDisabled={disabled} name="chevron-down" size={20} />
         </IconContainer>
       </Border>
       <ListBackground expanded={expanded}>

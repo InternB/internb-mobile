@@ -19,7 +19,7 @@ import {
 import { useAuth } from '../../hooks/auth';
 
 import Input from '../../components/Input';
-import Button from '../../components/AuthButton';
+import Button from '../../components/ActionButton';
 
 import logoImg from '../../assets/images/logoUnB.png';
 
@@ -94,7 +94,16 @@ const LoginScreen: React.FC = () => {
           secureTextEntry
         />
 
-        <Button onPress={handleLogin} isLoading={!loading}>
+        <Button
+          style={{
+            width: '60%',
+            alignSelf: 'center',
+            marginTop: 20,
+            marginBottom: 10,
+          }}
+          onPress={handleLogin}
+          isLoading={loading}
+        >
           Entrar
         </Button>
       </Form>
