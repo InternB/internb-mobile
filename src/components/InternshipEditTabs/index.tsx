@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Tab, TabTitle, TabsArea, Title, TitleArea } from './styles';
 
 interface Props {
-  title: string;
+  title?: string;
+  tabSelection: boolean[];
+  setTabSelection: React.Dispatch<React.SetStateAction<boolean[]>>;
 }
 
-const InternshipEditTabs: React.FC<Props> = ({ title = 'Título' }) => {
-  const [tabSelection, setTabSelection] = useState([true, false, false, false]);
-
+const InternshipEditTabs: React.FC<Props> = ({
+  title = 'Título',
+  tabSelection,
+  setTabSelection,
+}) => {
   return (
     <>
       <Container>

@@ -6,6 +6,6 @@ export const Container = styled.View`
 `;
 
 export const RadioButtonText = styled.Text`
-  margin-left: 10px;
-  font-size: 16px;
+  margin-left: 8px;
+  font-size: 14px;
 `;

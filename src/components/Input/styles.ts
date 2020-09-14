@@ -18,16 +18,15 @@ export const Border = styled.View<InputProps>`
     props.focus === true ? Styles.focusedColor : Styles.unfocusedColor};
   border-style: solid;
   width: 100%;
-  height: 50px;
+  height: 40px;
   padding: 0 16px;
   background: white;
   border-radius: 10px;
-  margin-bottom: 8px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-self: flex-start;
-  margin: 5px;
+  margin: 12px 0px 0px 0px;
 `;
 
 export const Label = styled.Text<InputProps>`

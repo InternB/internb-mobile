@@ -13,7 +13,7 @@ export const Border = styled.View<Props>`
   background-color: ${(props) =>
     props.isDisabled === true ? '#33333344' : '#ffffff'};
   width: 100%;
-  height: 50px;
+  height: 40px;
   border-radius: 10px;
   margin-top: 6px;
   margin-bottom: 8px;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { RadioButton } from 'react-native-paper';
+import { Text } from 'react-native';
 
 import {
   Container,
@@ -15,7 +16,8 @@ import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
 import InternshipEditTabs from '../../components/InternshipEditTabs';
 import InputSelection from '../../components/InputSelection';
-import RadioInput from '../../components/RadioInput';
+import RadioInput from '../../components/InputRadio';
+import Input from '../../components/Input';
 import { SubSectionTitle } from '../../components/Texts';
 import ActionButton from '../../components/ActionButton';
 
@@ -59,19 +61,34 @@ const preceptors = [
 ];
 
 const InternshipEdit: React.FC<Props> = ({ navigation }) => {
+  // Layout variables
+  const [tabSelection, setTabSelection] = useState([true, false, false, false]);
+  const [
+    selectionInputsDisabledStatus,
+    setSelectionInputDisabledStatus,
+  ] = useState([true, true]);
+  const [tabContent, setTabContent] = useState(<></>);
+
+  // selection inputs variables
   const [classroomIndex, setClassroomIndex] = useState(0);
   const [pairIndex, setPairIndex] = useState(0);
   const [otherIndex, setOtherIndex] = useState(0);
   const [schoolIndex, setSchoolIndex] = useState(0);
   const [preceptorIndex, setPreceptorIndex] = useState(0);
-  const [
-    selectionInputsDisabledStatus,
-    setSelectionInputDisabledStatus,
-  ] = useState([true, true]);
 
-  // data values
+  // data values variables
   const [internshipType, setInternshipType] = useState('individual');
+  const [internshipStart, setInternshipStart] = useState('');
+  const [internshipEnd, setInternshipEnd] = useState('');
+  const [monday, setMonday] = useState('');
+  const [tuesday, setTuesday] = useState('');
+  const [wednesday, setWednesday] = useState('');
+  const [thursday, setThursday] = useState('');
+  const [friday, setFriday] = useState('');
+  const [saturday, setSaturday] = useState('');
+  const [sunday, setSunday] = useState('');
 
+  // disable selection inputs accordingly
   useEffect(() => {
     if (internshipType === 'outros') {
       setSelectionInputDisabledStatus([true, false]);
@@ -82,13 +99,12 @@ const InternshipEdit: React.FC<Props> = ({ navigation }) => {
     }
   }, [internshipType]);
 
-  return (
-    <>
-      <OutOfBoundsFill />
-      <Container>
-        <Header navigation={navigation} title="Editar Estágio" showArrow />
-        <InternshipEditTabs title={classrooms[classroomIndex].name} />
-        <Body>
+  // render the correct tab content
+  useEffect(() => {
+    // informações de estágio
+    if (tabSelection[0]) {
+      setTabContent(
+        <>
           <SelectionInputsContainer>
             <SubSectionTitle>Selecione sua turma</SubSectionTitle>
             <InputSelection
@@ -147,6 +163,131 @@ const InternshipEdit: React.FC<Props> = ({ navigation }) => {
             </TextButton>
           </Row>
           <ActionButton>Enviar</ActionButton>
+        </>,
+      );
+      // grade horária
+    } else if (tabSelection[1]) {
+      setTabContent(
+        <>
+          <SelectionInputsContainer>
+            <SubSectionTitle>Previsão de duração de estágio</SubSectionTitle>
+            <Input
+              label="Início do estágio"
+              value={internshipStart}
+              onChangeText={(value: string) => {
+                setInternshipStart(value);
+              }}
+            />
+            <Input
+              label="Fim do estágio"
+              value={internshipEnd}
+              onChangeText={(value: string) => {
+                setInternshipEnd(value);
+              }}
+            />
+          </SelectionInputsContainer>
+          <SelectionInputsContainer>
+            <SubSectionTitle>Horário do estágio</SubSectionTitle>
+            <Input
+              label="Segunda"
+              value={monday}
+              onChangeText={(value: string) => {
+                setMonday(value);
+              }}
+            />
+            <Input
+              label="Terça"
+              value={tuesday}
+              onChangeText={(value: string) => {
+                setTuesday(value);
+              }}
+            />
+            <Input
+              label="Quarta"
+              value={wednesday}
+              onChangeText={(value: string) => {
+                setWednesday(value);
+              }}
+            />
+            <Input
+              label="Quinta"
+              value={thursday}
+              onChangeText={(value: string) => {
+                setThursday(value);
+              }}
+            />
+            <Input
+              label="Sexta"
+              value={friday}
+              onChangeText={(value: string) => {
+                setFriday(value);
+              }}
+            />
+            <Input
+              label="Sábado"
+              value={saturday}
+              onChangeText={(value: string) => {
+                setSaturday(value);
+              }}
+            />
+            <Input
+              label="Domingo"
+              value={sunday}
+              onChangeText={(value: string) => {
+                setSunday(value);
+              }}
+            />
+          </SelectionInputsContainer>
+          <ActionButton>Enviar</ActionButton>
+        </>,
+      );
+      // plano de trabalho
+    } else if (tabSelection[2]) {
+      setTabContent(
+        <>
+          <Text>Plano de trabalho</Text>
+        </>,
+      );
+      // registro
+    } else {
+      setTabContent(
+        <>
+          <Text>Registro</Text>
+        </>,
+      );
+    }
+  }, [
+    tabSelection,
+    classroomIndex,
+    internshipType,
+    selectionInputsDisabledStatus,
+    pairIndex,
+    otherIndex,
+    schoolIndex,
+    preceptorIndex,
+    internshipStart,
+    internshipEnd,
+    monday,
+    tuesday,
+    wednesday,
+    thursday,
+    friday,
+    saturday,
+    sunday,
+  ]);
+
+  return (
+    <>
+      <OutOfBoundsFill />
+      <Container>
+        <Header navigation={navigation} title="Editar Estágio" showArrow />
+        <InternshipEditTabs
+          title={classrooms[classroomIndex].name}
+          tabSelection={tabSelection}
+          setTabSelection={setTabSelection}
+        />
+        <Body>
+          {tabContent}
           <SelectionInputsContainer style={{ paddingBottom: 30 }} />
         </Body>
         <Navbar currentTab={2} navigation={navigation} />

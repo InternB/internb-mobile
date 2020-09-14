@@ -25,7 +25,7 @@ import logoImg from '../../assets/images/logoUnB.png';
 
 import Input from '../../components/Input';
 import Button from '../../components/ActionButton';
-import RadioInput from '../../components/RadioInput';
+import RadioInput from '../../components/InputRadio';
 
 interface SignUpFormData {
   fullname: string;

@@ -28,7 +28,7 @@ export const SelectionInputsContainer = styled.View`
   width: 55%;
   align-self: flex-start;
   min-height: 10px;
-  margin: 0px 0px 15px 25px;
+  margin: 0px 0px 18px 20px;
 `;
 
 export const Row = styled.View`
