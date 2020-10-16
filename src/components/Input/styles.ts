@@ -12,6 +12,11 @@ interface InputProps {
   hasContent?: boolean;
 }
 
+interface TextFieldProps {
+  editable?: boolean;
+  multiline?: boolean;
+}
+
 export const Border = styled.View<InputProps>`
   border-width: 2px;
   border-color: ${(props) =>
@@ -56,10 +61,11 @@ export const BorderHole = styled.Text<InputProps>`
   flex: 1;
 `;
 
-export const TextField = styled.TextInput<{ editable?: boolean }>`
+export const TextField = styled.TextInput<TextFieldProps>`
   flex: 9;
   color: ${(props) =>
     props.editable === false ? Styles.unfocusedColor : 'black'};
+  /* height: ${(props) => (props.multiline === true ? '200px' : '')}; */
 `;
 
 export const Icon = styled(FeatherIcon)`

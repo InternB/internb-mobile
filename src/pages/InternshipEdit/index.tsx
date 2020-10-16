@@ -10,6 +10,7 @@ import {
   Row,
   TextLink,
   TextButton,
+  BiggerContainer,
 } from './styles';
 
 import Navbar from '../../components/Navbar';
@@ -20,6 +21,7 @@ import RadioInput from '../../components/InputRadio';
 import Input from '../../components/Input';
 import { SubSectionTitle } from '../../components/Texts';
 import ActionButton from '../../components/ActionButton';
+import Table from '../../components/Table';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -252,7 +254,20 @@ const InternshipEdit: React.FC<Props> = ({ navigation }) => {
     } else {
       setTabContent(
         <>
-          <Text>Registro</Text>
+          <SelectionInputsContainer>
+            <Input label="Data" />
+            <Input label="Horário" />
+            <Input label="Turma" />
+          </SelectionInputsContainer>
+          <BiggerContainer>
+            <Input label="Atividades" multiline textAlignVertical="top" />
+          </BiggerContainer>
+
+          <ActionButton>Enviar</ActionButton>
+
+          <BiggerContainer>
+            <Table data={[{}, {}, {}, {}, {}, {}, {}, {}]} />
+          </BiggerContainer>
         </>,
       );
     }

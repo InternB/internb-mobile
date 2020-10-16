@@ -50,3 +50,9 @@ export const TextLink = styled.Text`
   padding-bottom: 25px;
   padding-left: 15px;
 `;
+
+export const BiggerContainer = styled.View`
+  width: 90%;
+  align-self: flex-start;
+  margin: 0px 0px 18px 20px;
+`;
