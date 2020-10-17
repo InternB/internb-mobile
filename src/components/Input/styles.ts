@@ -10,11 +10,11 @@ const Styles = {
 interface InputProps {
   focus?: boolean;
   hasContent?: boolean;
+  multiline?: boolean;
 }
 
 interface TextFieldProps {
   editable?: boolean;
-  multiline?: boolean;
 }
 
 export const Border = styled.View<InputProps>`
@@ -23,7 +23,7 @@ export const Border = styled.View<InputProps>`
     props.focus === true ? Styles.focusedColor : Styles.unfocusedColor};
   border-style: solid;
   width: 100%;
-  height: 40px;
+  height: ${(props) => (props.multiline === true ? '200px' : '40px')};
   padding: 0 16px;
   background: white;
   border-radius: 10px;
@@ -65,7 +65,6 @@ export const TextField = styled.TextInput<TextFieldProps>`
   flex: 9;
   color: ${(props) =>
     props.editable === false ? Styles.unfocusedColor : 'black'};
-  /* height: ${(props) => (props.multiline === true ? '200px' : '')}; */
 `;
 
 export const Icon = styled(FeatherIcon)`

@@ -15,7 +15,7 @@ import {
 
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
-import InternshipEditTabs from '../../components/InternshipEditTabs';
+import NavigationTabs from '../../components/NavigationTabs';
 import InputSelection from '../../components/InputSelection';
 import RadioInput from '../../components/InputRadio';
 import Input from '../../components/Input';
@@ -64,6 +64,12 @@ const preceptors = [
 
 const InternshipEdit: React.FC<Props> = ({ navigation }) => {
   // Layout variables
+  const tabs = [
+    'Informações de estágio',
+    'Grade Horária',
+    'Plano de Trabalho',
+    'Registro',
+  ];
   const [tabSelection, setTabSelection] = useState([true, false, false, false]);
   const [
     selectionInputsDisabledStatus,
@@ -296,7 +302,8 @@ const InternshipEdit: React.FC<Props> = ({ navigation }) => {
       <OutOfBoundsFill />
       <Container>
         <Header navigation={navigation} title="Editar Estágio" showArrow />
-        <InternshipEditTabs
+        <NavigationTabs
+          tabs={tabs}
           title={classrooms[classroomIndex].name}
           tabSelection={tabSelection}
           setTabSelection={setTabSelection}

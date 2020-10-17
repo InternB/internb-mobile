@@ -32,7 +32,9 @@
       "no-unused-expressions": "off",
       "react/jsx-props-no-spreading": "off",
       "react/prop-types": "off",
-      "prettier/prettier": "error",
+      "prettier/prettier": ["error", {
+        "endOfLine":"auto"
+      }],
       "spaced-comment": "off",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",

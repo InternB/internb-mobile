@@ -22,7 +22,7 @@ const Input: React.FC<Props> = ({ label = '', value = '', icon, ...rest }) => {
 
   return (
     <>
-      <Border focus={focus}>
+      <Border focus={focus} {...rest}>
         <BorderHole hasContent={hasContent} focus={focus}>
           {label}
         </BorderHole>

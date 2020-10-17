@@ -10,7 +10,8 @@ export const Container = styled.View`
   flex-direction: column;
 `;
 
-export const TitleArea = styled.View`
+export const TitleArea = styled.View<{ showTitle?: boolean }>`
+  display: ${(props) => (props.showTitle === false ? 'none' : 'flex')};
   width: 100%;
   height: 30px;
   background-color: #1c1e83;
@@ -32,13 +33,18 @@ export const TabsArea = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   showsHorizontalScrollIndicator: false,
 }))`
+  border-style: solid;
+  border-bottom-width: 2px;
+  border-color: #4d4bae;
 `;
 
 export const Tab = styled.TouchableOpacity<TabProps>`
   flex: 1;
+  min-width: 90px;
+  max-width: 160px;
   border-style: solid;
   border-top-width: 2px;
-  border-bottom-width: 2px;
+  border-bottom-width: 0px;
   border-right-width: 1px;
   border-color: #4d4bae;
   justify-content: center;
