@@ -14,10 +14,18 @@ export const Container = styled.SafeAreaView`
   justify-content: center;
 `;
 
-export const Body = styled.View`
+export const Body = styled.ScrollView.attrs(() => ({
+  contentContainerStyle: {
+    alignItems: 'center',
+  },
+}))`
   width: 100%;
-  height: 76%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 30px 0px;
+`;
+
+export const BiggerContainer = styled.View`
+  width: 90%;
+  align-self: flex-start;
+  margin: 0px 0px 18px 20px;
 `;

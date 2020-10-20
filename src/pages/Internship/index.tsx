@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import { Container, Body, OutOfBoundsFill } from './styles';
+import { Container, Body, OutOfBoundsFill, BiggerContainer } from './styles';
 
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
-import InternshipEditTabs from '../../components/NavigationTabs';
+import NavigationTabs from '../../components/NavigationTabs';
+import Table from '../../components/Table';
+import { SectionTitle, SubSectionTitle } from '../../components/Texts';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -75,13 +77,26 @@ const Internship: React.FC<Props> = ({ navigation }) => {
       <OutOfBoundsFill />
       <Container>
         <Header title="Estágio" />
+        <NavigationTabs
+          tabs={tabs}
+          showTitle={false}
+          tabSelection={tabSelection}
+          setTabSelection={setTabSelection}
+        />
         <Body>
-          <InternshipEditTabs
-            tabs={tabs}
-            showTitle={false}
-            tabSelection={tabSelection}
-            setTabSelection={setTabSelection}
-          />
+          <BiggerContainer>
+            {/* Grade Horaria component */}
+            <SubSectionTitle>Imagens</SubSectionTitle>
+            {/* Imagens component */}
+            <SubSectionTitle>Plano de Aula</SubSectionTitle>
+            {/* Plano de aula component */}
+            <SubSectionTitle>Registro de Atividades</SubSectionTitle>
+            <Table
+              data={[{}, {}, {}, {}, {}, {}]}
+              showHeader={false}
+              isClickable
+            />
+          </BiggerContainer>
         </Body>
         <Navbar currentTab={0} navigation={navigation} />
       </Container>
