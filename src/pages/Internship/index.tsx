@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
-import { Container, Body, OutOfBoundsFill, BiggerContainer } from './styles';
+import {
+  Container,
+  Body,
+  OutOfBoundsFill,
+  BiggerContainer,
+  ContentText,
+  LabelText,
+  Row,
+  Section,
+  TitleText,
+} from './styles';
 
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
@@ -85,6 +95,88 @@ const Internship: React.FC<Props> = ({ navigation }) => {
         />
         <Body>
           <BiggerContainer>
+            <Section>
+              <Row>
+                <TitleText>Discente:</TitleText>
+                <ContentText>Nome_Completo_Aluno</ContentText>
+              </Row>
+              <Row>
+                <Row>
+                  <LabelText>CPF:</LabelText>
+                  <ContentText>123456789_10</ContentText>
+                </Row>
+                <Row>
+                  <LabelText>Matrícula:</LabelText>
+                  <ContentText>20_0123456</ContentText>
+                </Row>
+              </Row>
+              <Row>
+                <LabelText>Telefone:</LabelText>
+                <ContentText>123546789</ContentText>
+              </Row>
+              <Row>
+                <LabelText>E-mail:</LabelText>
+                <ContentText>aluno_aluno_com_br</ContentText>
+              </Row>
+              <Row>
+                <LabelText>Código da Turma:</LabelText>
+                <ContentText>12345</ContentText>
+              </Row>
+            </Section>
+            <Section>
+              <Row>
+                <TitleText>Tipo de estágio:</TitleText>
+                <ContentText>{internships[0].type}</ContentText>
+              </Row>
+            </Section>
+            <Section>
+              <Row>
+                <TitleText>Escola:</TitleText>
+                <ContentText>{internships[0].school.name}</ContentText>
+              </Row>
+              <Row>
+                <LabelText>CEP:</LabelText>
+                <ContentText>{internships[0].school.cep}</ContentText>
+              </Row>
+              <Row>
+                <LabelText>Endereço:</LabelText>
+                <ContentText>{internships[0].school.address}</ContentText>
+              </Row>
+              <Row>
+                <LabelText>Telefone:</LabelText>
+                <ContentText>{internships[0].school.phone}</ContentText>
+              </Row>
+              <Row>
+                <LabelText>E-mail:</LabelText>
+                <ContentText>{internships[0].school.mail}</ContentText>
+              </Row>
+            </Section>
+            <Section>
+              <Row>
+                <TitleText>Professor Preceptor:</TitleText>
+                <ContentText>{internships[0].professor.name}</ContentText>
+              </Row>
+              <Row>
+                <LabelText>E-mail:</LabelText>
+                <ContentText>{internships[0].professor.mail}</ContentText>
+              </Row>
+              <Row>
+                <LabelText>Telefone:</LabelText>
+                <ContentText>{internships[0].professor.phone}</ContentText>
+              </Row>
+            </Section>
+            <Section>
+              <Row>
+                <Row>
+                  <TitleText>Início do estágio:</TitleText>
+                  <LabelText>{internships[0].start}</LabelText>
+                </Row>
+                <Row>
+                  <TitleText>Fim do estágio:</TitleText>
+                  <LabelText>{internships[0].end}</LabelText>
+                </Row>
+              </Row>
+            </Section>
             {/* Grade Horaria component */}
             <SubSectionTitle>Imagens</SubSectionTitle>
             {/* Imagens component */}
