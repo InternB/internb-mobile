@@ -16,7 +16,8 @@ import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
 import NavigationTabs from '../../components/NavigationTabs';
 import Table from '../../components/Table';
-import { SectionTitle, SubSectionTitle } from '../../components/Texts';
+import Schedule from '../../components/Schedule';
+import { SubSectionTitle } from '../../components/Texts';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -47,6 +48,15 @@ const Internship: React.FC<Props> = ({ navigation }) => {
       },
       start: '10/03/2020',
       end: '31/12/2020',
+      schedule: {
+        monday: [false, false, true, true, true, false, false],
+        tuesday: [false, true, true, true, false, false, false],
+        wednesday: [false, false, true, true, true, false, false],
+        thursday: [false, true, true, true, false, false, false],
+        friday: [false, false, true, true, true, false, false],
+        saturday: [false, false, false, false, false, false, false],
+        sunday: [false, false, false, false, false, false, false],
+      },
     },
     {
       classroom: 'Turma B',
@@ -65,6 +75,15 @@ const Internship: React.FC<Props> = ({ navigation }) => {
       },
       start: '12/04/2020',
       end: '31/12/2020',
+      schedule: {
+        monday: [false, false, false, false, false, false, false],
+        tuesday: [false, false, false, false, false, false, false],
+        wednesday: [false, false, false, false, false, false, false],
+        thursday: [false, false, false, false, false, false, false],
+        friday: [false, false, false, false, false, false, false],
+        saturday: [false, false, false, false, false, false, false],
+        sunday: [false, false, false, false, false, false, false],
+      },
     },
   ]);
 
@@ -177,7 +196,7 @@ const Internship: React.FC<Props> = ({ navigation }) => {
                 </Row>
               </Row>
             </Section>
-            {/* Grade Horaria component */}
+            <Schedule data={internships[0].schedule} />
             <SubSectionTitle>Imagens</SubSectionTitle>
             {/* Imagens component */}
             <SubSectionTitle>Plano de Aula</SubSectionTitle>
