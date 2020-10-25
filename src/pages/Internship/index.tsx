@@ -17,6 +17,7 @@ import Header from '../../components/Header';
 import NavigationTabs from '../../components/NavigationTabs';
 import Table from '../../components/Table';
 import Schedule from '../../components/Schedule';
+import ImagesComponent from '../../components/ImagesComponent';
 import { SubSectionTitle } from '../../components/Texts';
 
 interface Props {
@@ -195,17 +196,25 @@ const Internship: React.FC<Props> = ({ navigation }) => {
               </Row>
             </Row>
           </Section>
-          <Schedule data={internships[tabIndex].schedule} />
-          <SubSectionTitle>Imagens</SubSectionTitle>
-          {/* Imagens component */}
-          <SubSectionTitle>Plano de Aula</SubSectionTitle>
-          {/* Plano de aula component */}
-          <SubSectionTitle>Registro de Atividades</SubSectionTitle>
-          <Table
-            data={[{}, {}, {}, {}, {}, {}]}
-            showHeader={false}
-            isClickable
-          />
+          <Section>
+            <Schedule data={internships[tabIndex].schedule} />
+          </Section>
+          <Section>
+            <SubSectionTitle>Imagens</SubSectionTitle>
+            <ImagesComponent data={[0, 0, 0, 0, 0]} />
+          </Section>
+          <Section>
+            <SubSectionTitle>Plano de Aula</SubSectionTitle>
+            {/* Plano de aula component */}
+          </Section>
+          <Section>
+            <SubSectionTitle>Registro de Atividades</SubSectionTitle>
+            <Table
+              data={[{}, {}, {}, {}, {}, {}]}
+              showHeader={false}
+              isClickable
+            />
+          </Section>
         </BiggerContainer>
       </>,
     );
