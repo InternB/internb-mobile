@@ -5,6 +5,7 @@ import AuthRoutes from './auth.routes';
 import AppRoutes from './app.routes';
 
 import { useAuth } from '../hooks/auth';
+import AdminRoutes from './admin.routes';
 
 const Routes: React.FC = () => {
   const { user, loading } = useAuth();
@@ -18,8 +19,9 @@ const Routes: React.FC = () => {
   }
 
   // hardcode pra testar
-  return user ? <AppRoutes /> : <AuthRoutes />;
+  // return user ? <AppRoutes /> : <AuthRoutes />
   // return <AppRoutes />;
+  return <AdminRoutes />;
 };
 
 export default Routes;

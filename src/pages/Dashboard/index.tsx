@@ -28,7 +28,6 @@ const Dashboard: React.FC<Props> = ({ navigation }) => {
             completar o tutorial);
           </Text>
         </Body>
-        <Navbar currentTab={1} navigation={navigation} />
       </Container>
     </>
   );
