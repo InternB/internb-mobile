@@ -17,14 +17,24 @@ export const UserCard = styled.View`
   border: 1px solid black;
 `;
 
+export const UserIDContainer = styled.View`
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
+
 export const UserAvatarContainer = styled.View`
   width: 80px;
   height: 80px;
+
+  border-radius: 40px;
+  border: 1px solid black;
+  background-color: white;
+
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
-  border-radius: 50px;
-  background-color: white;
+
+  margin-bottom: 20px;
 `;
 
 export const UserAvatarImage = styled.Image`
@@ -37,12 +47,15 @@ export const UserAvatarImage = styled.Image`
 
 export const UserInfoContainer = styled.View`
   flex: 1;
-  justify-content: center;
-  padding: 10px;
+  margin-left: 20px;
+`;
+
+export const UserData = styled.View`
+  flex: 1;
+  margin-bottom: 20px;
 `;
 
 export const UserButtonsContainer = styled.View`
-  width: 100%;
   flex-direction: row;
   align-items: center;
   justify-content: center;

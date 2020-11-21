@@ -8,9 +8,11 @@ import {
   Container,
   Title,
   UserCard,
+  UserIDContainer,
   UserAvatarContainer,
   UserAvatarImage,
   UserInfoContainer,
+  UserData,
   UserButtonsContainer,
   UserButton,
   UserButtonText,
@@ -19,7 +21,7 @@ import api from '../../../services/api';
 
 interface IUsers {
   id: string;
-  role: number;
+  role: 1 | 2 | 3 | 4;
   created_at: string;
   updated_at: string;
   deleted_at: string;
@@ -31,6 +33,13 @@ interface IUsers {
   avatar_url: string;
 }
 
+const UserRoles = {
+  '1': 'Admin',
+  '2': 'Professor',
+  '3': 'Preceptor',
+  '4': 'Estudante',
+};
+
 const defaultAvatar = 'http://localhost:3333/images/profiles/default.png';
 
 const Users: React.FC = () => {
@@ -41,7 +50,7 @@ const Users: React.FC = () => {
       const response = await api.get<IUsers[]>('/users', {
         headers: {
           authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjowLCJpYXQiOjE2MDQxNzk5NDgsImV4cCI6MTYwNDI2NjM0OCwic3ViIjoiNDQ5M2FiZmMtNmRiOS00Nzk3LWEzODEtMDU3OGUyM2E0NGZiIn0.CDiXv-2RzvD_DZuL361CBtNpRCFMpG471R7GWIKCKkw',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjowLCJpYXQiOjE2MDU5ODIxNTgsImV4cCI6MTYwNjA2ODU1OCwic3ViIjoiNDQ5M2FiZmMtNmRiOS00Nzk3LWEzODEtMDU3OGUyM2E0NGZiIn0.gcbwPvhlR1bUruSPhshYmfRcI2EkHrs2X2hiOwNHZmc',
         },
       });
 
@@ -68,21 +77,42 @@ const Users: React.FC = () => {
       {!users && <ActivityIndicator size="large" color="#007715" />}
       {users && (
         <FlatList
+          style={{ padding: 20 }}
           data={users}
           renderItem={({ item }) => (
             <UserCard>
-              <UserAvatarContainer>
-                {item.avatar_url !== defaultAvatar && (
-                  <UserAvatarImage
-                    source={{ uri: item.avatar_url, width: 80, height: 80 }}
-                  />
-                )}
-                {item.avatar_url === defaultAvatar && (
-                  <MaterialIcon name="account" size={50} color="#007715" />
-                )}
-              </UserAvatarContainer>
-              <UserInfoContainer>
+              <UserIDContainer>
+                <UserAvatarContainer>
+                  {item.avatar_url !== defaultAvatar && (
+                    <UserAvatarImage
+                      source={{ uri: item.avatar_url, width: 80, height: 80 }}
+                    />
+                  )}
+                  {item.avatar_url === defaultAvatar && (
+                    <MaterialIcon name="account" size={50} color="#007715" />
+                  )}
+                </UserAvatarContainer>
                 <Title>{item.fullname}</Title>
+                <Title>{UserRoles[item.role]}</Title>
+              </UserIDContainer>
+              <UserInfoContainer>
+                <UserData>
+                  <Title>{item.email}</Title>
+                  <Title>{item.phone}</Title>
+                  <Title>{item.cpf}</Title>
+                  <Title>
+                    Ativo:
+                    {item.active ? ' Sim' : ' Não'}
+                  </Title>
+                  <Title>
+                    Criado:
+                    {` ${item.created_at}`}
+                  </Title>
+                  <Title>
+                    Atualizado:
+                    {` ${item.updated_at}`}
+                  </Title>
+                </UserData>
                 <UserButtonsContainer>
                   <UserButton
                     disabled={item.active}
