@@ -50,7 +50,7 @@ const Users: React.FC = () => {
       const response = await api.get<IUsers[]>('/users', {
         headers: {
           authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjowLCJpYXQiOjE2MDU5ODIxNTgsImV4cCI6MTYwNjA2ODU1OCwic3ViIjoiNDQ5M2FiZmMtNmRiOS00Nzk3LWEzODEtMDU3OGUyM2E0NGZiIn0.gcbwPvhlR1bUruSPhshYmfRcI2EkHrs2X2hiOwNHZmc',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjowLCJpYXQiOjE2MDYxNTMwNTQsImV4cCI6MTYwNjIzOTQ1NCwic3ViIjoiOTQ3MGM5M2EtZTczYS00MWU1LTk3ZjEtNGU2ZWNkODMyMjg4In0.iU2IWMsttiyBt9mEPrjWwdeF9a7bLK5CxU63juXmai0',
         },
       });
 
