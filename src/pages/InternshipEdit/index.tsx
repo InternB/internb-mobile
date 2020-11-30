@@ -107,7 +107,7 @@ const InternshipEdit: React.FC<Props> = ({ navigation }) => {
     }
   }, [internshipType]);
 
-  // render the correct tab content
+  // render the correct tab content   **Separar em 4 páginas
   useEffect(() => {
     // informações de estágio
     if (tabSelection[0]) {

@@ -104,7 +104,7 @@ const Internship: React.FC<Props> = ({ navigation }) => {
     setTabSelection(tabSelectionAux);
   }, [internships]);
 
-  // load tab content
+  // load tab content         **nao retornar arvore, só valor
   useEffect(() => {
     for (let i = 0; i < tabSelection.length; i += 1) {
       if (tabSelection[i] === true) {
@@ -112,111 +112,109 @@ const Internship: React.FC<Props> = ({ navigation }) => {
       }
     }
     setTabContent(
-      <>
-        <BiggerContainer>
-          <Section>
+      <BiggerContainer>
+        <Section>
+          <Row>
+            <TitleText>Discente:</TitleText>
+            <ContentText>Nome_Completo_Aluno</ContentText>
+          </Row>
+          <Row>
             <Row>
-              <TitleText>Discente:</TitleText>
-              <ContentText>Nome_Completo_Aluno</ContentText>
+              <LabelText>CPF:</LabelText>
+              <ContentText>123456789_10</ContentText>
             </Row>
             <Row>
-              <Row>
-                <LabelText>CPF:</LabelText>
-                <ContentText>123456789_10</ContentText>
-              </Row>
-              <Row>
-                <LabelText>Matrícula:</LabelText>
-                <ContentText>20_0123456</ContentText>
-              </Row>
+              <LabelText>Matrícula:</LabelText>
+              <ContentText>20_0123456</ContentText>
+            </Row>
+          </Row>
+          <Row>
+            <LabelText>Telefone:</LabelText>
+            <ContentText>123546789</ContentText>
+          </Row>
+          <Row>
+            <LabelText>E-mail:</LabelText>
+            <ContentText>aluno_aluno_com_br</ContentText>
+          </Row>
+          <Row>
+            <LabelText>Código da Turma:</LabelText>
+            <ContentText>12345</ContentText>
+          </Row>
+        </Section>
+        <Section>
+          <Row>
+            <TitleText>Tipo de estágio:</TitleText>
+            <ContentText>{internships[tabIndex].type}</ContentText>
+          </Row>
+        </Section>
+        <Section>
+          <Row>
+            <TitleText>Escola:</TitleText>
+            <ContentText>{internships[tabIndex].school.name}</ContentText>
+          </Row>
+          <Row>
+            <LabelText>CEP:</LabelText>
+            <ContentText>{internships[tabIndex].school.cep}</ContentText>
+          </Row>
+          <Row>
+            <LabelText>Endereço:</LabelText>
+            <ContentText>{internships[tabIndex].school.address}</ContentText>
+          </Row>
+          <Row>
+            <LabelText>Telefone:</LabelText>
+            <ContentText>{internships[tabIndex].school.phone}</ContentText>
+          </Row>
+          <Row>
+            <LabelText>E-mail:</LabelText>
+            <ContentText>{internships[tabIndex].school.mail}</ContentText>
+          </Row>
+        </Section>
+        <Section>
+          <Row>
+            <TitleText>Professor Preceptor:</TitleText>
+            <ContentText>{internships[tabIndex].professor.name}</ContentText>
+          </Row>
+          <Row>
+            <LabelText>E-mail:</LabelText>
+            <ContentText>{internships[tabIndex].professor.mail}</ContentText>
+          </Row>
+          <Row>
+            <LabelText>Telefone:</LabelText>
+            <ContentText>{internships[tabIndex].professor.phone}</ContentText>
+          </Row>
+        </Section>
+        <Section>
+          <Row>
+            <Row>
+              <TitleText>Início do estágio:</TitleText>
+              <LabelText>{internships[tabIndex].start}</LabelText>
             </Row>
             <Row>
-              <LabelText>Telefone:</LabelText>
-              <ContentText>123546789</ContentText>
+              <TitleText>Fim do estágio:</TitleText>
+              <LabelText>{internships[tabIndex].end}</LabelText>
             </Row>
-            <Row>
-              <LabelText>E-mail:</LabelText>
-              <ContentText>aluno_aluno_com_br</ContentText>
-            </Row>
-            <Row>
-              <LabelText>Código da Turma:</LabelText>
-              <ContentText>12345</ContentText>
-            </Row>
-          </Section>
-          <Section>
-            <Row>
-              <TitleText>Tipo de estágio:</TitleText>
-              <ContentText>{internships[tabIndex].type}</ContentText>
-            </Row>
-          </Section>
-          <Section>
-            <Row>
-              <TitleText>Escola:</TitleText>
-              <ContentText>{internships[tabIndex].school.name}</ContentText>
-            </Row>
-            <Row>
-              <LabelText>CEP:</LabelText>
-              <ContentText>{internships[tabIndex].school.cep}</ContentText>
-            </Row>
-            <Row>
-              <LabelText>Endereço:</LabelText>
-              <ContentText>{internships[tabIndex].school.address}</ContentText>
-            </Row>
-            <Row>
-              <LabelText>Telefone:</LabelText>
-              <ContentText>{internships[tabIndex].school.phone}</ContentText>
-            </Row>
-            <Row>
-              <LabelText>E-mail:</LabelText>
-              <ContentText>{internships[tabIndex].school.mail}</ContentText>
-            </Row>
-          </Section>
-          <Section>
-            <Row>
-              <TitleText>Professor Preceptor:</TitleText>
-              <ContentText>{internships[tabIndex].professor.name}</ContentText>
-            </Row>
-            <Row>
-              <LabelText>E-mail:</LabelText>
-              <ContentText>{internships[tabIndex].professor.mail}</ContentText>
-            </Row>
-            <Row>
-              <LabelText>Telefone:</LabelText>
-              <ContentText>{internships[tabIndex].professor.phone}</ContentText>
-            </Row>
-          </Section>
-          <Section>
-            <Row>
-              <Row>
-                <TitleText>Início do estágio:</TitleText>
-                <LabelText>{internships[tabIndex].start}</LabelText>
-              </Row>
-              <Row>
-                <TitleText>Fim do estágio:</TitleText>
-                <LabelText>{internships[tabIndex].end}</LabelText>
-              </Row>
-            </Row>
-          </Section>
-          <Section>
-            <Schedule data={internships[tabIndex].schedule} />
-          </Section>
-          <Section>
-            <SubSectionTitle>Imagens</SubSectionTitle>
-            <ImagesComponent data={[0, 0, 0, 0, 0]} />
-          </Section>
-          <Section>
-            <SubSectionTitle>Plano de Aula</SubSectionTitle>
-            {/* Plano de aula component */}
-          </Section>
-          <Section>
-            <SubSectionTitle>Registro de Atividades</SubSectionTitle>
-            <Table
-              data={[{}, {}, {}, {}, {}, {}]}
-              showHeader={false}
-              isClickable
-            />
-          </Section>
-        </BiggerContainer>
-      </>,
+          </Row>
+        </Section>
+        <Section>
+          <Schedule data={internships[tabIndex].schedule} />
+        </Section>
+        <Section>
+          <SubSectionTitle>Imagens</SubSectionTitle>
+          <ImagesComponent data={[0, 0, 0, 0, 0]} />
+        </Section>
+        <Section>
+          <SubSectionTitle>Plano de Aula</SubSectionTitle>
+          {/* Plano de aula component */}
+        </Section>
+        <Section>
+          <SubSectionTitle>Registro de Atividades</SubSectionTitle>
+          <Table
+            data={[{}, {}, {}, {}, {}, {}]}
+            showHeader={false}
+            isClickable
+          />
+        </Section>
+      </BiggerContainer>,
     );
   }, [internships, tabIndex, tabSelection]);
 

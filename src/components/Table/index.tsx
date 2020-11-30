@@ -24,7 +24,7 @@ const Table: React.FC<Props> = ({
     const auxRow = [];
     for (let i = 0; i < data.length; i += 1) {
       auxRow.push(
-        <TableRow index={i} key={`Registro ${i}`}>
+        <TableRow index={i} key={Math.random() * 100}>
           <TableContentText>Registro 1</TableContentText>
           <TableContentText>00/00/0000</TableContentText>
         </TableRow>,
