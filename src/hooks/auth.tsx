@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, {
   createContext,
   useCallback,
@@ -14,10 +15,19 @@ interface SignInCredentials {
   password: string;
 }
 
-interface User {
+export interface User {
   id: string;
   fullname: string;
   email: string;
+  active: boolean;
+  avatar: string;
+  avatar_url: string;
+  cpf: string;
+  created_at: string;
+  deleted_at: string;
+  phone: string;
+  role: number;
+  updated_at: string;
 }
 
 interface AuthContextState {
