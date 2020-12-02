@@ -4,7 +4,6 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Placeholder from '../pages/Placeholder';
-import Dashboard from '../pages/Dashboard';
 import Profile from '../pages/Profile';
 import Users from '../pages/Admin/Users';
 
