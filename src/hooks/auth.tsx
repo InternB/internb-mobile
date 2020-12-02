@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 import React, {
   createContext,
   useCallback,
@@ -18,12 +20,16 @@ interface User {
   id: string;
   fullname: string;
   email: string;
+  phone?: string;
+  old_password?: string;
+  new_password?: string;
 }
 
 interface AuthContextState {
   user: User;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
+  update(user: User): Promise<void>;
   loading: boolean;
 }
 
@@ -81,8 +87,32 @@ export const AuthProvider: React.FC = ({ children }) => {
     setData({} as AuthState);
   }, []);
 
+  const update = useCallback(
+    async ({ fullname, email, phone, old_password, new_password }: User) => {
+      const response = await api.put('profiles', {
+        fullname,
+        email,
+        phone,
+        old_password,
+        new_password,
+      });
+
+      const { token } = data;
+
+      await AsyncStorage.multiSet([
+        ['@InternB:token', token],
+        ['@InternB:user', JSON.stringify(response.data)],
+      ]);
+
+      setData({ token, user: response.data });
+    },
+    [data],
+  );
+
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut, loading }}>
+    <AuthContext.Provider
+      value={{ user: data.user, signIn, signOut, loading, update }}
+    >
       {children}
     </AuthContext.Provider>
   );
