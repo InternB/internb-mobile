@@ -35,6 +35,7 @@ interface EnroledClass {
   class_discipline_id: string;
   class_id: string;
   class_professor_id: string;
+  class_professor: Record<string, Record<string, string>>;
   compromise: string;
   contract_files: string;
   created_at: string;
@@ -123,7 +124,7 @@ const Classes: React.FC<Props> = ({ navigation }) => {
           for (let i = 0; i < internships.length; i += 1) {
             let name = 'Disciplina';
             let sign = 'X';
-            const professor = 'Professor';
+            const professor = internships[i].class_professor.user.fullname;
             const enroledStudents: Array<string> = [];
             // get nome disciplina
             await api.get('/disciplines', config).then((resp) => {
@@ -151,15 +152,6 @@ const Classes: React.FC<Props> = ({ navigation }) => {
                 }
               }
             });
-            // // get name professor (Como que pega se eu não for admin?)
-            // await api.get('/users', config).then((resp) => {
-            //   for (let j = 0; j < resp.data.length; j += 1) {
-            //     if (resp.data[j].id === internships[i].class_professor_id) {
-            //       professor = resp.data[j].name;
-            //       break;
-            //     }
-            //   }
-            // });
             auxEnroledClasses.push(
               <EnroledClass
                 classroomName={`${name} - Turma ${sign}`}
