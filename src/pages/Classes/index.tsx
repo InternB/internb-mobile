@@ -54,9 +54,44 @@ const Classes: React.FC<Props> = ({ navigation }) => {
   const [loadingEnroled, setLoadingEnroled] = useState<boolean>(true);
   const [loadingClassrooms, setLoadingClassrooms] = useState<boolean>(true);
   const [enroledClasses, setEnroledClasses] = useState<Array<Element>>([]);
+  const [searchedClasses, setSearchedClasses] = useState<Array<Element>>([]);
 
-  const handleClassroomSearch = async () => {
+  // Pesquisa por turmas
+  const handleClassroomSearch = async (searchTerm: string) => {
+    let name: string;
+    const auxSearchedClasses: Array<Element> = [];
+
     setLoadingClassrooms(true);
+    AsyncStorage.getItem('@InternB:token').then(async (tk) => {
+      const token = tk;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      await api
+        .get('/disciplines', config)
+        .then(async (res) => {
+          for (let i = 0; i < res.data.length; i += 1) {
+            name = res.data[i].name;
+            if (
+              name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              res.data[i].id.toLowerCase().includes(searchTerm.toLowerCase())
+            ) {
+              auxSearchedClasses.push(
+                <AvailableClass
+                  subjectName={name}
+                  subjectCode={res.data[i].id}
+                />,
+              );
+            }
+          }
+        })
+        .then(() => {
+          setSearchedClasses(auxSearchedClasses);
+          setLoadingClassrooms(false);
+        });
+    });
   };
 
   // Carrega turmas matriculadas
@@ -150,9 +185,9 @@ const Classes: React.FC<Props> = ({ navigation }) => {
             value={classroomName}
             onChangeText={(value: string) => {
               setClassroomName(value);
-              if (value.length > 2) {
+              if (value.length > 1) {
                 setClassroomSearch(true);
-                handleClassroomSearch();
+                handleClassroomSearch(value);
               } else {
                 setClassroomSearch(false);
               }
@@ -192,33 +227,7 @@ const Classes: React.FC<Props> = ({ navigation }) => {
                   <TitleArea>
                     <SubSectionTitle>Turmas:</SubSectionTitle>
                   </TitleArea>
-                  {/* Lista de turmas para se matricular */}
-                  <AvailableClass
-                    subjectName="Introdução à Ciência da Computação"
-                    subjectCode="CIC1298"
-                  />
-                  <AvailableClass
-                    subjectName="Autômatos e Computabilidade"
-                    subjectCode="CIC9476"
-                  />
-                  <AvailableClass
-                    subjectName="Software Básico"
-                    subjectCode="CIC4590"
-                  />
-                  <AvailableClass
-                    subjectName="Tópicos Avançados em Computação"
-                    subjectCode="CIC3395"
-                  />
-                  <AvailableClass
-                    subjectName="Estágio Obrigatório"
-                    subjectCode="CIC1113"
-                  />
-                  <AvailableClass />
-                  <AvailableClass />
-                  <AvailableClass />
-                  <AvailableClass />
-                  <AvailableClass />
-                  <AvailableClass />
+                  {searchedClasses}
                 </>
               )}
             </>
