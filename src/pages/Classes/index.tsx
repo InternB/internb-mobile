@@ -20,7 +20,7 @@ import Header from '../../components/Header';
 import { SubSectionTitle } from '../../components/Texts';
 import Input from '../../components/Input';
 import EnroledClass from '../../components/EnroledClass';
-import AvailableClass from '../../components/AvailableClass';
+import AvailableClass, { ClassroomType } from '../../components/AvailableClass';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -56,7 +56,7 @@ const Classes: React.FC<Props> = ({ navigation }) => {
   const [enroledClasses, setEnroledClasses] = useState<Array<Element>>([]);
   const [searchedClasses, setSearchedClasses] = useState<Array<Element>>([]);
 
-  // Pesquisa por turmas
+  // Pesquisa por disciplinas
   const handleClassroomSearch = async (searchTerm: string) => {
     let name: string;
     const auxSearchedClasses: Array<Element> = [];
@@ -78,10 +78,19 @@ const Classes: React.FC<Props> = ({ navigation }) => {
               name.toLowerCase().includes(searchTerm.toLowerCase()) ||
               res.data[i].id.toLowerCase().includes(searchTerm.toLowerCase())
             ) {
+              const auxTurmas: Array<ClassroomType> = [];
+              await api.get('/classes/discipline', config).then((resp) => {
+                for (let j = 0; j < resp.data.length; j += 1) {
+                  if (res.data[i].id === resp.data[j].discipline_id) {
+                    auxTurmas.push(resp.data[j]);
+                  }
+                }
+              });
               auxSearchedClasses.push(
                 <AvailableClass
                   subjectName={name}
                   subjectCode={res.data[i].id}
+                  classes={auxTurmas}
                 />,
               );
             }
