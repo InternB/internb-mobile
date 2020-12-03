@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SubjectBorder,
   Title,
@@ -16,6 +16,7 @@ interface Props {
   subjectCode?: string; // codigo da disciplina
   classroomName?: string; // turma
   professor?: string; // nome do professor
+  studentsList?: Array<string>; // lista de ids dos estudantes matriculados
 }
 
 const EnroledClass: React.FC<Props> = ({
@@ -23,8 +24,26 @@ const EnroledClass: React.FC<Props> = ({
   subjectCode = 'CDD0001',
   classroomName = 'Turma A',
   professor = 'Nome Completo do Professor',
+  studentsList = [],
 }) => {
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [enroledStudents, setEnroledStudents] = useState<Array<Element>>([]);
+
+  useEffect(() => {
+    const name = 'Nome Completo do Aluno';
+    const auxEnroledStudents: Array<Element> = [];
+    for (let i = 0; i < studentsList.length; i += 1) {
+      // como que pega o nome do Aluno sem ser admin?
+      // await api.get('/users');
+      auxEnroledStudents.push(
+        <StudentListItem>
+          <InformationDataText>{name}</InformationDataText>
+        </StudentListItem>,
+      );
+    }
+    setEnroledStudents(auxEnroledStudents);
+  }, [studentsList]);
+
   return (
     <>
       <SubjectBorder
@@ -52,21 +71,7 @@ const EnroledClass: React.FC<Props> = ({
           <SubtitleText>Alunos</SubtitleText>
         </SubtitleHeader>
 
-        <StudentListItem>
-          <InformationDataText>Nome Completo do Aluno</InformationDataText>
-        </StudentListItem>
-        <StudentListItem>
-          <InformationDataText>Nome Completo do Aluno</InformationDataText>
-        </StudentListItem>
-        <StudentListItem>
-          <InformationDataText>Nome Completo do Aluno</InformationDataText>
-        </StudentListItem>
-        <StudentListItem>
-          <InformationDataText>Nome Completo do Aluno</InformationDataText>
-        </StudentListItem>
-        <StudentListItem>
-          <InformationDataText>Nome Completo do Aluno</InformationDataText>
-        </StudentListItem>
+        {enroledStudents}
       </SubjectInformation>
     </>
   );

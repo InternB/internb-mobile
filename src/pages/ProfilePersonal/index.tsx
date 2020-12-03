@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useAuth, User } from '../../hooks/auth';
@@ -9,7 +10,6 @@ import Header from '../../components/Header';
 import Avatar from '../../components/UserAvatar';
 import Input from '../../components/Input';
 import Button from '../../components/ActionButton';
-import api from '../../services/api';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,44 +22,38 @@ const ProfilePersonal: React.FC<Props> = ({ navigation }) => {
   const [cpf] = useState<string>(
     currentUser.cpf.replace(
       /(\d{3})(\d{3})(\d{3})(\d{2})/,
-      (regex, argumento1, argumento2, argumento3, argumento4) => {
+      (
+        regex: string,
+        argumento1: string,
+        argumento2: string,
+        argumento3: string,
+        argumento4: string,
+      ) => {
         return `${argumento1}.${argumento2}.${argumento3}-${argumento4}`;
       },
     ),
   );
-  const [email, setEmail] = useState<string>(currentUser.email);
-  const [matricula, setMatricula] = useState<string>(currentUser.cpf);
+  const [email, setEmail] = useState<string | undefined>(currentUser.email);
+  const [matricula, setMatricula] = useState<string>('');
   const [phone, setPhone] = useState<string>(currentUser.phone);
   const [loading, setLoading] = useState<boolean>(false);
-  let token: string | null;
-
-  AsyncStorage.getItem('@InternB:token').then((tk) => {
-    token = tk;
-  });
+  const { update } = useAuth();
 
   const handleUpdate = async (): Promise<void> => {
     setLoading(true);
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    let data = {};
-    let user: User = currentUser;
+
+    let user: User;
 
     // O back não deixa atualizar as infos se mandar o mesmo email. Caso não mude email, não vamos enviar email.
     if (email === currentUser.email) {
-      data = { fullname: name, email, phone };
+      user = { fullname: name, phone, cpf, id: currentUser.id };
     } else {
-      data = { fullname: name, email, phone };
+      user = { fullname: name, email, phone, cpf, id: currentUser.id };
     }
 
     try {
       // atualizar dados
-      await api.put('/profiles', data, config).then((res) => {
-        user = res.data;
-        // atualizar imagem (se tiver imagem nova pra atualizar, senao ignora)
-      });
+      await update(user);
     } catch (err) {
       console.log(err);
     } finally {
