@@ -17,6 +17,7 @@ import {
 } from './styles';
 
 import { useAuth } from '../../hooks/auth';
+import { useUpload } from '../../hooks/upload';
 
 import Input from '../../components/Input';
 import Button from '../../components/AuthButton';
@@ -35,41 +36,44 @@ const LoginScreen: React.FC = () => {
 
   const { navigate } = useNavigation();
   const { signIn } = useAuth();
+  const { upload } = useUpload();
 
-  const handleLogin = useCallback(async () => {
-    try {
-      setLoading(true);
-
-      const data: SignInFormData = {
-        email,
-        password,
-      };
-
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .email('Digite um e-mail válido')
-          .required('E-mail obrigatório'),
-        password: Yup.string().min(6, 'Senha obrigatória'),
-      });
-
-      await schema.validate(data, {
-        abortEarly: false,
-      });
-
-      await signIn({ email, password });
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        // Sinalizar nos campos!
-        console.log('Validation Error!');
-      } else {
-        // Alerta na tela!
-        console.log(err);
-      }
-    } finally {
-      setLoading(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [email, password, setLoading]);
+  const handleLogin = useCallback(
+    async () => {
+      await upload('1', '2');
+      // try {
+      //   setLoading(true);
+      //   const data: SignInFormData = {
+      //     email,
+      //     password,
+      //   };
+      //   const schema = Yup.object().shape({
+      //     email: Yup.string()
+      //       .email('Digite um e-mail válido')
+      //       .required('E-mail obrigatório'),
+      //     password: Yup.string().min(6, 'Senha obrigatória'),
+      //   });
+      //   await schema.validate(data, {
+      //     abortEarly: false,
+      //   });
+      //   await signIn({ email, password });
+      // } catch (err) {
+      //   if (err instanceof Yup.ValidationError) {
+      //     // Sinalizar nos campos!
+      //     console.log('Validation Error!');
+      //   } else {
+      //     // Alerta na tela!
+      //     console.log(err);
+      //   }
+      // } finally {
+      //   setLoading(false);
+      // }
+      // // eslint-disable-next-line react-hooks/exhaustive-deps
+    },
+    [
+      /*email, password, setLoading*/
+    ],
+  );
 
   return (
     <Container>
