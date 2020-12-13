@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { AuthProvider } from './auth';
-import { UploadProvider } from './upload';
+import { StorageProvider } from './storage';
 
 const AppProvider: React.FC = ({ children }) => {
   return (
     <AuthProvider>
-      <UploadProvider>{children}</UploadProvider>
+      <StorageProvider>{children}</StorageProvider>
     </AuthProvider>
   );
 };

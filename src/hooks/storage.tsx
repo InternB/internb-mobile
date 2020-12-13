@@ -11,6 +11,7 @@ interface UploadFileOptions {
   internship_id: string;
   file: string;
   storageFolder: 'compromises' | 'work-plans' | 'avatars';
+  extension: string;
 }
 
 interface UploadContractsOptions {
@@ -19,28 +20,36 @@ interface UploadContractsOptions {
     first_copy: string;
     second_copy: string;
     third_copy: string;
+    extensions: string[];
   };
 }
 
-interface UploadContextState {
-  uploadFile(uploadOptions: UploadFileOptions): Promise<void>;
-  uploadContracts(uploadOptions: UploadContractsOptions): Promise<void>;
+interface DownloadOptions {
+  storageFolder: string;
+  filenames: string | string[];
 }
 
-const UploadContext = createContext<UploadContextState>(
-  {} as UploadContextState,
+interface StorageContextState {
+  uploadFile(uploadOptions: UploadFileOptions): Promise<void>;
+  uploadContracts(uploadOptions: UploadContractsOptions): Promise<void>;
+  downloadFiles(downloadOptions: DownloadOptions): Promise<string | string[]>;
+}
+
+const StorageContext = createContext<StorageContextState>(
+  {} as StorageContextState,
 );
 
-export const UploadProvider: React.FC = ({ children }) => {
+export const StorageProvider: React.FC = ({ children }) => {
   const uploadFile = useCallback(
     async ({
       internship_id,
       file,
       storageFolder,
+      extension,
     }: UploadFileOptions): Promise<void> => {
       const filename = v4();
 
-      const ref = storage().ref(`${storageFolder}/${filename}`);
+      const ref = storage().ref(`${storageFolder}/${filename}.${extension}`);
 
       try {
         await ref.putString(file, 'base64');
@@ -68,9 +77,15 @@ export const UploadProvider: React.FC = ({ children }) => {
       const second_filename = v4();
       const third_filename = v4();
 
-      const first_ref = storage().ref(`contracts/${first_filename}`);
-      const second_ref = storage().ref(`contracts/${second_filename}`);
-      const third_ref = storage().ref(`contracts/${third_filename}`);
+      const first_ref = storage().ref(
+        `contracts/${first_filename}.${data.extensions[0]}`,
+      );
+      const second_ref = storage().ref(
+        `contracts/${second_filename}.${data.extensions[1]}`,
+      );
+      const third_ref = storage().ref(
+        `contracts/${third_filename}.${data.extensions[2]}`,
+      );
 
       try {
         await first_ref.putString(data.first_copy, 'base64');
@@ -90,13 +105,39 @@ export const UploadProvider: React.FC = ({ children }) => {
     [],
   );
 
+  const downloadFiles = useCallback(
+    async ({ storageFolder, filenames }: DownloadOptions) => {
+      if (typeof filenames === 'string') {
+        const url = await storage()
+          .ref(`${storageFolder}/${filenames}`)
+          .getDownloadURL();
+
+        return url;
+      }
+
+      const urls: string[] = [];
+
+      filenames.forEach(async (filename) => {
+        const url = await storage()
+          .ref(`${storageFolder}/${filename}`)
+          .getDownloadURL();
+        urls.push(url);
+      });
+
+      return urls;
+    },
+    [],
+  );
+
   return (
-    <UploadContext.Provider value={{ uploadFile, uploadContracts }}>
+    <StorageContext.Provider
+      value={{ uploadFile, uploadContracts, downloadFiles }}
+    >
       {children}
-    </UploadContext.Provider>
+    </StorageContext.Provider>
   );
 };
 
-export function useUpload(): UploadContextState {
-  return useContext(UploadContext);
+export function useStorage(): StorageContextState {
+  return useContext(StorageContext);
 }
