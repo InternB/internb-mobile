@@ -21,6 +21,7 @@ import {
 export interface ClassroomType {
   id?: string;
   professor_id?: string;
+  professor?: string;
   discipline_id?: string;
   sign?: string;
 }
