@@ -39,23 +39,19 @@ const LoginScreen: React.FC = () => {
   const handleLogin = useCallback(async () => {
     try {
       setLoading(true);
-
       const data: SignInFormData = {
         email,
         password,
       };
-
       const schema = Yup.object().shape({
         email: Yup.string()
           .email('Digite um e-mail válido')
           .required('E-mail obrigatório'),
         password: Yup.string().min(6, 'Senha obrigatória'),
       });
-
       await schema.validate(data, {
         abortEarly: false,
       });
-
       await signIn({ email, password });
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
