@@ -88,7 +88,7 @@ export const PasswordLabel = styled.Text`
 
 export const PasswordInput = styled.TextInput`
   background-color: #ffffff99;
-  height: 18px;
+  height: 20px;
   width: 45%;
   margin-left: 5px;
   border-style: solid;
@@ -96,6 +96,8 @@ export const PasswordInput = styled.TextInput`
   border-color: #2526a5;
   border-radius: 8px;
   padding-left: 3%;
+  padding-top: 0;
+  padding-bottom: 0;
   color: #443db4;
 `;
 

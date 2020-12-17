@@ -1,7 +1,10 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable no-await-in-loop */
+import AsyncStorage from '@react-native-community/async-storage';
 import React, { useEffect, useState } from 'react';
+import api from '../../services/api';
 import {
   SubjectBorder,
   Title,
@@ -35,14 +38,37 @@ interface Props {
 interface ClassroomProps {
   isLastChild?: boolean; // só por questão de estilo, informe se é o último elemento da lista
   sign?: string;
+  id?: string;
 }
 
 const Classroom: React.FC<ClassroomProps> = ({
   isLastChild = false,
   sign = 'X',
+  id = '',
 }) => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
+
+  const handleClassroomSignup = () => {
+    AsyncStorage.getItem('@InternB:token').then(async (tk) => {
+      const token = tk;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      await api
+        .post('/internships', { class_id: id, password }, config)
+        .then(async (res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(
+            `\n${err}\ntoken: ${tk}\nclass_id: ${id}\npassword: ${password}\n`,
+          );
+        });
+    });
+  };
 
   return (
     <>
@@ -67,7 +93,11 @@ const Classroom: React.FC<ClassroomProps> = ({
               }}
             />
           </Row>
-          <EnrollButton>
+          <EnrollButton
+            onPress={() => {
+              handleClassroomSignup();
+            }}
+          >
             <EnrollButtonText>Matricular</EnrollButtonText>
           </EnrollButton>
         </Row>
@@ -88,9 +118,13 @@ const AvailableClass: React.FC<Props> = ({
     const auxClassrooms: Array<Element> = [];
     for (let i = 0; i < classes.length; i += 1) {
       if (i === classes.length - 1) {
-        auxClassrooms.push(<Classroom isLastChild sign={classes[i].sign} />);
+        auxClassrooms.push(
+          <Classroom isLastChild sign={classes[i].sign} id={classes[i].id} />,
+        );
       } else {
-        auxClassrooms.push(<Classroom sign={classes[i].sign} />);
+        auxClassrooms.push(
+          <Classroom sign={classes[i].sign} id={classes[i].id} />,
+        );
       }
     }
     setClassrooms(auxClassrooms);

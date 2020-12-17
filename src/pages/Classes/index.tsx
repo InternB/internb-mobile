@@ -203,7 +203,11 @@ const Classes: React.FC<Props> = ({ navigation }) => {
                   <TitleArea>
                     <SubSectionTitle>Turmas Matriculadas:</SubSectionTitle>
                   </TitleArea>
-                  <ActivityIndicator style={{ marginTop: '10%' }} size={10} />
+                  <ActivityIndicator
+                    style={{ marginTop: '10%' }}
+                    size={10}
+                    color="#0000ff"
+                  />
                 </>
               ) : (
                 <>
@@ -221,7 +225,11 @@ const Classes: React.FC<Props> = ({ navigation }) => {
                   <TitleArea>
                     <SubSectionTitle>Turmas:</SubSectionTitle>
                   </TitleArea>
-                  <ActivityIndicator style={{ marginTop: '10%' }} size={10} />
+                  <ActivityIndicator
+                    style={{ marginTop: '10%' }}
+                    size={10}
+                    color="#0000ff"
+                  />
                 </>
               ) : (
                 <>
