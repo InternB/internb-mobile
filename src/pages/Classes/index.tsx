@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-loop-func */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
@@ -27,7 +28,7 @@ interface Props {
   navigation: any;
 }
 
-interface EnroledClass {
+export interface EnroledClass {
   id: string;
   assessment_id: string;
   begins_at: string;
@@ -54,6 +55,7 @@ const Classes: React.FC<Props> = ({ navigation }) => {
   const [classroomSearch, setClassroomSearch] = useState<boolean>(false);
   const [loadingEnroled, setLoadingEnroled] = useState<boolean>(true);
   const [loadingClassrooms, setLoadingClassrooms] = useState<boolean>(true);
+  const [enroledClassesId, setEnroledClassesId] = useState<Array<string>>([]);
   const [enroledClasses, setEnroledClasses] = useState<Array<Element>>([]);
   const [searchedClasses, setSearchedClasses] = useState<Array<Element>>([]);
 
@@ -92,6 +94,8 @@ const Classes: React.FC<Props> = ({ navigation }) => {
                   subjectName={name}
                   subjectCode={res.data[i].id}
                   classes={auxTurmas}
+                  navigation={navigation}
+                  enroledClasses={enroledClassesId}
                 />,
               );
             }
@@ -108,6 +112,7 @@ const Classes: React.FC<Props> = ({ navigation }) => {
   const getEnroledClasses = async () => {
     let internships: Array<EnroledClass> = [];
     const auxEnroledClasses: Array<Element> = [];
+    const auxEnroledClassesId: Array<string> = [];
 
     setLoadingEnroled(true);
     AsyncStorage.getItem('@InternB:token').then(async (tk) => {
@@ -152,6 +157,7 @@ const Classes: React.FC<Props> = ({ navigation }) => {
                 }
               }
             });
+            auxEnroledClassesId.push(internships[i].class_id);
             auxEnroledClasses.push(
               <EnroledClass
                 classroomName={`${name} - Turma ${sign}`}
@@ -165,6 +171,7 @@ const Classes: React.FC<Props> = ({ navigation }) => {
         })
         .then(() => {
           setEnroledClasses(auxEnroledClasses);
+          setEnroledClassesId(auxEnroledClassesId);
           setLoadingEnroled(false);
         });
     });

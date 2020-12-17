@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
@@ -33,21 +34,29 @@ interface Props {
   subjectName?: string; // nome da disciplina
   subjectCode?: string; // codigo da disciplina
   classes?: Array<ClassroomProps>; // turmas
+  enroledClasses?: Array<any>; // turmas
+  navigation?: any;
 }
 
 interface ClassroomProps {
   isLastChild?: boolean; // só por questão de estilo, informe se é o último elemento da lista
   sign?: string;
   id?: string;
+  navigation?: any;
+  enroledClasses?: Array<any>;
 }
 
 const Classroom: React.FC<ClassroomProps> = ({
   isLastChild = false,
   sign = 'X',
   id = '',
+  navigation,
+  enroledClasses = [],
 }) => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
+  const [enroled, setEnroled] = useState<Element>(<></>);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleClassroomSignup = () => {
     AsyncStorage.getItem('@InternB:token').then(async (tk) => {
@@ -59,8 +68,9 @@ const Classroom: React.FC<ClassroomProps> = ({
       };
       await api
         .post('/internships', { class_id: id, password }, config)
-        .then(async (res) => {
-          console.log(res.data);
+        .then(async () => {
+          setPassword('');
+          navigation.navigate('Perfil');
         })
         .catch((err) => {
           console.log(
@@ -69,6 +79,39 @@ const Classroom: React.FC<ClassroomProps> = ({
         });
     });
   };
+
+  useEffect(() => {
+    setEnroled(
+      <Row>
+        <Row noSpace>
+          <PasswordLabel>Senha:</PasswordLabel>
+          <PasswordInput
+            value={password}
+            onChangeText={(value: string) => {
+              setPassword(value);
+            }}
+          />
+        </Row>
+        <EnrollButton
+          onPress={() => {
+            handleClassroomSignup();
+          }}
+        >
+          <EnrollButtonText>Matricular</EnrollButtonText>
+        </EnrollButton>
+      </Row>,
+    );
+    for (let i = 0; i < enroledClasses.length; i += 1) {
+      if (enroledClasses[i] === id) {
+        setEnroled(
+          <Row noSpace>
+            <PasswordLabel>Já Matriculado</PasswordLabel>
+          </Row>,
+        );
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enroledClasses]);
 
   return (
     <>
@@ -83,24 +126,7 @@ const Classroom: React.FC<ClassroomProps> = ({
         </Row>
       </ClassroomListItem>
       <EnrolmentSection active={expanded} isLastChild={isLastChild}>
-        <Row>
-          <Row noSpace>
-            <PasswordLabel>Senha:</PasswordLabel>
-            <PasswordInput
-              value={password}
-              onChangeText={(value: string) => {
-                setPassword(value);
-              }}
-            />
-          </Row>
-          <EnrollButton
-            onPress={() => {
-              handleClassroomSignup();
-            }}
-          >
-            <EnrollButtonText>Matricular</EnrollButtonText>
-          </EnrollButton>
-        </Row>
+        {enroled}
       </EnrolmentSection>
     </>
   );
@@ -110,6 +136,8 @@ const AvailableClass: React.FC<Props> = ({
   subjectName = 'Nome da Disciplina',
   subjectCode = 'CDD0001',
   classes = [],
+  navigation,
+  enroledClasses = [],
 }) => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [classrooms, setClassrooms] = useState<Array<Element>>([]);
@@ -119,16 +147,27 @@ const AvailableClass: React.FC<Props> = ({
     for (let i = 0; i < classes.length; i += 1) {
       if (i === classes.length - 1) {
         auxClassrooms.push(
-          <Classroom isLastChild sign={classes[i].sign} id={classes[i].id} />,
+          <Classroom
+            navigation={navigation}
+            isLastChild
+            sign={classes[i].sign}
+            id={classes[i].id}
+            enroledClasses={enroledClasses}
+          />,
         );
       } else {
         auxClassrooms.push(
-          <Classroom sign={classes[i].sign} id={classes[i].id} />,
+          <Classroom
+            navigation={navigation}
+            sign={classes[i].sign}
+            id={classes[i].id}
+            enroledClasses={enroledClasses}
+          />,
         );
       }
     }
     setClassrooms(auxClassrooms);
-  }, [classes]);
+  }, [classes, navigation]);
 
   return (
     <>
