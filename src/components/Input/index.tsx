@@ -6,11 +6,19 @@ interface Props extends TextInputProps {
   label?: string;
   value?: string;
   icon?: string;
+  placeholder?: string;
 }
 
-const Input: React.FC<Props> = ({ label = '', value = '', icon, ...rest }) => {
+const Input: React.FC<Props> = ({
+  label = '',
+  value = '',
+  icon,
+  placeholder = '',
+  ...rest
+}) => {
   const [focus, setFocus] = useState<boolean>(false);
   const [hasContent, setHasContent] = useState<boolean>(false);
+  const [placeholderContent, setPlaceholderContent] = useState<string>('');
 
   useEffect(() => {
     if (value.length > 0) {
@@ -20,9 +28,17 @@ const Input: React.FC<Props> = ({ label = '', value = '', icon, ...rest }) => {
     }
   }, [value]);
 
+  useEffect(() => {
+    if (focus) {
+      setPlaceholderContent(placeholder);
+    } else {
+      setPlaceholderContent('');
+    }
+  }, [focus, placeholder]);
+
   return (
     <>
-      <Border focus={focus}>
+      <Border focus={focus} {...rest}>
         <BorderHole hasContent={hasContent} focus={focus}>
           {label}
         </BorderHole>
@@ -32,6 +48,7 @@ const Input: React.FC<Props> = ({ label = '', value = '', icon, ...rest }) => {
         <TextField
           {...rest}
           value={value}
+          placeholder={placeholderContent}
           onFocus={() => {
             setFocus(true);
           }}

@@ -1,6 +1,15 @@
 import styled from 'styled-components/native';
 
-export const Avatar = styled.Image`
+interface Props {
+  hide?: boolean;
+}
+
+export const LoadingIndicator = styled.ActivityIndicator<Props>`
+  display: ${(props) => (props.hide ? 'none' : 'flex')};
+`;
+
+export const Avatar = styled.Image<Props>`
+  display: ${(props) => (props.hide ? 'none' : 'flex')};
   margin-top: 35px;
   margin-bottom: 5px;
   width: 120px;

@@ -24,8 +24,8 @@ import {
 import logoImg from '../../assets/images/logoUnB.png';
 
 import Input from '../../components/Input';
-import Button from '../../components/AuthButton';
-import RadioInput from '../../components/RadioInput';
+import Button from '../../components/ActionButton';
+import RadioInput from '../../components/InputRadio';
 
 interface SignUpFormData {
   fullname: string;
@@ -181,7 +181,7 @@ const SignUpScreen: React.FC = () => {
             </RadioButton.Group>
           </RadioContainer>
 
-          <Button onPress={handleRegistration} isLoading={!loading}>
+          <Button onPress={handleRegistration} isLoading={loading}>
             Cadastrar
           </Button>
         </Form>

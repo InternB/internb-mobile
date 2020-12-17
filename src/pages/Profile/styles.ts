@@ -14,12 +14,15 @@ export const Container = styled.SafeAreaView`
   justify-content: center;
 `;
 
-export const Body = styled.View`
+export const Body = styled.ScrollView.attrs(() => ({
+  contentContainerStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexGrow: 1,
+  },
+}))`
   width: 100%;
-  height: 76%;
   display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const ProfileArea = styled.View`

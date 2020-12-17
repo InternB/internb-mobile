@@ -1,12 +1,21 @@
 import React from 'react';
-import { RectButtonProperties } from 'react-native-gesture-handler';
+import { ActivityIndicator, TouchableOpacityProps } from 'react-native';
 
 import { Container, ButtonText } from './styles';
 
-const Button: React.FC<RectButtonProperties> = ({ children, ...rest }) => {
+interface ButtonProps extends TouchableOpacityProps {
+  isLoading?: boolean;
+}
+
+const Button: React.FC<ButtonProps> = ({
+  children,
+  isLoading = false,
+  ...rest
+}) => {
   return (
-    <Container {...rest}>
+    <Container {...rest} disabled={isLoading}>
       <ButtonText>{children}</ButtonText>
+      {isLoading && <ActivityIndicator />}
     </Container>
   );
 };

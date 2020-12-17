@@ -16,13 +16,15 @@ interface SignInCredentials {
   password: string;
 }
 
-interface User {
+export interface User {
   id: string;
   fullname: string;
-  email: string;
-  phone?: string;
+  email?: string;
+  cpf: string;
+  phone: string;
   old_password?: string;
   new_password?: string;
+  avatar_url?: string;
 }
 
 interface AuthContextState {
@@ -88,11 +90,20 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const update = useCallback(
-    async ({ fullname, email, phone, old_password, new_password }: User) => {
+    async ({
+      fullname,
+      email,
+      phone,
+      old_password,
+      new_password,
+      cpf,
+    }: User) => {
+      let user;
       const response = await api.put('profiles', {
         fullname,
         email,
         phone,
+        cpf,
         old_password,
         new_password,
       });

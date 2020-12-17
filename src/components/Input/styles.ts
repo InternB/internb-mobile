@@ -2,14 +2,19 @@ import styled from 'styled-components/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
 const Styles = {
-  focusedColor: '#8789d5',
-  unfocusedColor: '#9e9e9e',
+  focusedColor: '#4d4bae',
+  unfocusedColor: '#56557e',
   fontSize: 16,
 };
 
 interface InputProps {
   focus?: boolean;
   hasContent?: boolean;
+  multiline?: boolean;
+}
+
+interface TextFieldProps {
+  editable?: boolean;
 }
 
 export const Border = styled.View<InputProps>`
@@ -18,15 +23,15 @@ export const Border = styled.View<InputProps>`
     props.focus === true ? Styles.focusedColor : Styles.unfocusedColor};
   border-style: solid;
   width: 100%;
-  height: 50px;
+  height: ${(props) => (props.multiline === true ? '200px' : '40px')};
   padding: 0 16px;
   background: white;
   border-radius: 10px;
-  margin-bottom: 8px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  margin: 5px;
+  align-self: flex-start;
+  margin: 12px 0px 0px 0px;
 `;
 
 export const Label = styled.Text<InputProps>`
@@ -56,7 +61,7 @@ export const BorderHole = styled.Text<InputProps>`
   flex: 1;
 `;
 
-export const TextField = styled.TextInput<{ editable?: boolean }>`
+export const TextField = styled.TextInput<TextFieldProps>`
   flex: 9;
   color: ${(props) =>
     props.editable === false ? Styles.unfocusedColor : 'black'};
