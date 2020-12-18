@@ -69,7 +69,6 @@ const Classroom: React.FC<ClassroomProps> = ({
       await api
         .post('/internships', { class_id: id, password }, config)
         .then(async () => {
-          setPassword('');
           navigation.navigate('Perfil');
         })
         .catch((err) => {
@@ -87,7 +86,7 @@ const Classroom: React.FC<ClassroomProps> = ({
           <PasswordLabel>Senha:</PasswordLabel>
           <PasswordInput
             value={password}
-            onChangeText={(value: string) => {
+            onChangeText={(value) => {
               setPassword(value);
             }}
           />
@@ -111,7 +110,7 @@ const Classroom: React.FC<ClassroomProps> = ({
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [enroledClasses]);
+  }, [enroledClasses, password]);
 
   return (
     <>
